@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <link rel="stylesheet" href="/css/newstyle.css" />
+  <link rel="stylesheet" href="/css/choices.css">
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <%if(title === "newView" || title === "patientMedicalView" ){%>
+  <link rel="stylesheet" href="/css/print.css" />
+  <%}%>
+ <%if(title === "View Referal Doctor"){%>
+  <link rel="stylesheet" href="/css/<%=printt%>" />
+  <%}%>
+  <link rel="stylesheet" href="/css/mediaQ.css">
+  <link rel="stylesheet" href="/css/lightbox.css">
+  <link rel="icon" type="image/png" href="/img/doctech.png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/bootstrap/build/css/countrySelect.min.css">
+  <title><%=title %></title>
+</head>
+
+<body>
+
+  <!-- navbar -->
+  <%- include('./Header.ejs') %>
+  <!-- end of navbar -->
+  <!-- content -->
+  <%- include(`templates/${body}`) %>
+  <!-- end of content -->
+  <footer class="border mt-auto w-100 main-footer no-print">
+    <span class="text-center w-100 d-block">Copyright &copy; 2024. All rights reserved.</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="/bootstrap/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="/js/lightbox-plus-jquery.js"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/bootstrap/build/js/countrySelect.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2"></script>
+  <script>
+    $(document).ready(function() {
+      $("#pCountry").countrySelect({
+        defaultCountry: "eg", // Set your default country code
+        preferredCountries: ['ps', 'eg', 'ye', 'sd', 'sa'], // List of preferred countries (optional)
+        excludeCountries: ['il'], // List of countries to exclude (optional)
+        responsiveDropdown: true // Enable responsive behavior
+      });
+
+      // Open dropdown on click:
+      $('#pCountryTrigger').on('click', function() {
+        $(this).siblings('#pCountry').countrySelect('open');
+      });
+
+      // Open dropdown and filter on input:
+      $('#pCountry').on('input', function() {
+
+        $(this).countrySelect('open');
+      });
+    });
+  </script>
+
+  <script src="/js/test.js"></script>
+  <script src="/js/bundle.js"></script>
+
+</body>
+
+</html>

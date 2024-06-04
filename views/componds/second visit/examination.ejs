@@ -1,0 +1,39 @@
+<div x-show="currentPage === 8" class="form-page" id="page-9">
+  <div class="my-3 row nophoto-row" id="l-Examination">
+    <h5>Examination</h5>
+    <div class="insidecontent" id="examinationsContainer">
+      <div class="twoinputs row">
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="examinationsType"></textarea>
+        </div>
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="examinationsComment"></textarea>
+        </div>
+        <div class="col-16 my-1 text-center ">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-3 row text-center btn-row">
+    <div class="col">
+      <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('examinationsContainer')">
+        Add Examination
+      </button>
+    </div>
+  </div>
+  <div class="my-3 row nophoto-row plan" id="l-Plan">
+    <h5>Plan</h5>
+    <div class="col-16 my-1">
+      <textarea class="form-control collectplan" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Plan" autocomplete="on" name="plansType"></textarea>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-secondary" @click="currentPage = 7; activeListItem = 7">Back</button>
+    </div>
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-primary" @click="currentPage = 9; activeListItem = 9">Next</button>
+    </div>
+  </div>
+</div>

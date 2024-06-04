@@ -1,0 +1,400 @@
+<div class="container p-5 my-5 border bg-light shadow fs-5 rounded-3 wrd-brk">
+  <div class="row">
+    <div class="col-12 col-md-6 mb-5 d-flex justify-content-center">
+      <input type="text" class="form-control text-center rounded-5 fs-4" placeholder="Date" id="RangeDate" />
+    </div>
+    <div class="col-12 col-md-2 mb-5 d-flex justify-content-center">
+      <button class="btn btn-outline-info searchranedate">
+        Search
+      </button>
+    </div>
+    <div class="col-12 col-md-2 mb-5 d-flex justify-content-center gap-2">
+      <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Booking
+      </button>
+    </div>
+    <div class="col-12 col-md-2 mb-5 d-flex justify-content-center gap-2">
+      <a href="/QueueV2" class="btn btn-outline-primary px-4 d-flex justify-content-center align-items-center">Today?</a>
+    </div>
+  </div>
+  <div class="row">
+
+    <!-- idk dude start -->
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="col-12 mb-3">
+        <h2 class="text-center text-secondary">
+          HoldList
+        </h2>
+      </div>
+      <!-- Queue Container -->
+      <div class="col-12 flex-column d-md-flex align-items-center gap-1 mb-3 QM-item-Container">
+        <!-- Queue item -->
+        <%Array.from(hold).forEach((item) => {%>
+        <div class="col-12 flex-column d-md-flex align-items-center gap-1 mb-3 QM-item-Container">
+          <!-- Queue item -->
+          <div class="col-12 border p-2 my-1 rounded-3 pq-info QM-item d-flex flex-column align-items-center">
+            <div class="row">
+              <div class="col-12 text-center wrd-break mb-2 d-flex justify-content-around">
+                <span><%=item.patient.name%></span>
+                <button class="btn btnToggleVerification fs-5" data-item-id="<%= item._id %>" data-is-verified="<%= item.virified %>">
+                  <% if (item.virified) { %>
+                  <i class="fas fa-check-circle"></i>
+                  <% } else { %>
+                  <i class="far fa-circle"></i>
+                  <% } %>
+                </button>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 word-wrap">
+                <span>Age:<%=item.patient.age%></span>
+                <span>Phone:</span>
+                <span><%=item.patient.phoneNumber%></span>
+                <span>حجز:<%=item.HAGZ%></span>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 text-xl-center">
+                <span>Appointment At</span>
+                <span><%= item.date?.toLocaleString('en-US', { weekday: 'long'}) %></span>
+                <span><%= item.date?.toLocaleString('en-US', {  month: 'long', day: 'numeric', }) %></span>
+                <span><%= item.date?.toLocaleString('en-US', {  hour: 'numeric', minute: 'numeric', hour12: true }) %></span>
+              </div>
+              <div class="col-12 text-center wrd-break mb-2 d-flex justify-content-around">
+                <span>note:</span>
+                <span><%=item.note%></span>
+              </div>
+            </div>
+            <div class="row mt-3 mb-1 w-sm-100 w-100">
+              <div class="col-6 px-1 text-center">
+                <button class="btn btn-outline-danger w-100 pindingdelete" type="button" delete-serial="<%=item._id%>">Delete</button>
+              </div>
+              <div class="col-6 px-1 text-center">
+                <button class="btn btn-outline-success w-100 addtoqueuefrompending" type="button" data-serial="<%=item._id%>">add</button>
+              </div>
+            </div>
+          </div>
+          <!-- Queue item -->
+        </div>
+        <%})%>
+
+        <!-- Queue item -->
+      </div>
+      <!-- Queue Container -->
+    </div>
+    <!-- idk dude end -->
+
+
+    <!-- pending queue start -->
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="col-12 mb-3">
+        <h2 class="text-center text-success">
+          Pending
+          <span class="fs-2">(<%=queue.filter(item => item.status === 'pending').length%>)</span>
+        </h2>
+      </div>
+      <!-- Queue Container -->
+      <div class="col-12 flex-column d-md-flex align-items-center gap-1 mb-3 QM-item-Container">
+        <!-- Queue item -->
+        <%Array.from(queue).filter(item => item.status === 'pending') .sort((a, b) => (a.date && b.date) ? a.date - b.date : 0).forEach((item) => {%>
+        <div class="col-12 flex-column d-md-flex align-items-center gap-1 mb-3 QM-item-Container">
+          <!-- Queue item -->
+          <div class="col-12 border p-2 my-1 rounded-3 pq-info QM-item d-flex flex-column align-items-center">
+            <div class="row">
+              <div class="col-12 text-center wrd-break mb-2 d-flex justify-content-around">
+                <span><%=item.patient.name%></span>
+                <button class="btn btnToggleVerification" data-item-id="<%= item._id %>" data-is-verified="<%= item.virified %>">
+                  <% if (item.virified) { %>
+                  <i class="fas fa-check-circle"></i>
+                  <% } else { %>
+                  <i class="far fa-circle"></i>
+                  <% } %>
+                </button>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 word-wrap">
+                <span>Age:<%=item.patient.age%></span>
+                <span>Phone:</span>
+                <span><%=item.patient.phoneNumber%></span>
+                <span>حجز:<%=item.HAGZ%></span>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 text-xl-center">
+                <span>Appointment At</span>
+                <span><%= item.date?.toLocaleString('en-US', { weekday: 'long'}) %></span>
+                <span><%= item.date?.toLocaleString('en-US', {  month: 'long', day: 'numeric', }) %></span>
+                <span><%= item.date?.toLocaleString('en-US', {  hour: 'numeric', minute: 'numeric', hour12: true }) %></span>
+              </div>
+            </div>
+            <div class="row mt-3 mb-1 w-sm-100 w-100">
+              <div class="col-6 px-1 text-center">
+                <button class="btn btn-outline-danger w-100 pindingdelete" type="button" delete-serial="<%=item._id%>">Delete</button>
+              </div>
+              <div class="col-6 px-1 text-center">
+                <button class="btn btn-outline-success w-100 addtoqueuefrompending" type="button" data-serial="<%=item._id%>">add</button>
+              </div>
+            </div>
+          </div>
+          <!-- Queue item -->
+        </div>
+        <%})%>
+
+        <!-- Queue item -->
+      </div>
+      <!-- Queue Container -->
+    </div>
+    <!-- pending queue end -->
+
+
+    <!-- in queue start -->
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="col-12 mb-3">
+        <h2 class="text-center text-info">
+          In Queue
+          <span class="fs-2">(<%=queue.filter(item => item.status === 'inQueue').length%>)</span>
+        </h2>
+      </div>
+      <%Array.from(queue).filter(item => item.status === 'inQueue').sort((a, b) => (a.date && b.date) ? a.date - b.date : 0).forEach((item) => {%>
+
+      <div class="col-12 flex-column d-md-flex align-items-center gap-1 mb-3 QM-item-Container">
+        <!-- Queue item -->
+        <div class="col-12 border p-2 my-1 rounded-3 pq-info QM-item d-flex flex-column align-items-center">
+          <div class="row">
+            <div class="col-12 text-center wrd-break mb-2">
+              <span><%=item.patient.name%></span>
+            </div>
+            <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 word-wrap">
+
+              <span>Age:<%=item.patient.age%></span>
+              <span>Phone:</span>
+              <span><%=item.patient.phoneNumber%></span>
+              <span>حجز:<%=item.HAGZ%></span>
+            </div>
+            <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 text-xl-center">
+              <span>Added to Queue</span>
+              <span><%=item.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })%></span>
+            </div>
+          </div>
+          <div class="row mt-3 mb-1 w-sm-100 w-100">
+            <%if (user.role === 'admin') {%>
+            <div class="col-6 px-1 text-center">
+              <button class="btn btn-outline-danger  pindingdelete w-100" type="button" delete-serial="<%=item._id%>">Delete</button>
+            </div>
+            <div class="col-6 px-1 text-center">
+              <a href="#" class="btn btn-outline-info w-100" onclick="goToPatientAndDelete('<%= item.patient.id %>', '<%= item.id %>')">GO</a>
+            </div>
+            <%}else{%>
+            <div class="col-12 px-1 text-center">
+              <button class="btn btn-outline-danger  pindingdelete w-100" type="button" delete-serial="<%=item._id%>">Delete</button>
+            </div>
+            <%}%>
+          </div>
+        </div>
+        <!--  -->
+        <!-- Queue item -->
+      </div>
+      <%})%>
+          </div>
+          <!-- in queue end -->
+
+          <!-- completed queue start -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="col-12 mb-3">
+              <h2 class="text-center text-danger">
+                Completed
+                <span class="fs-2">(<%=queue.filter(item => item.status === 'completed').length%>)</span>
+              </h2>
+            </div>
+            <div class="col-12 mb-3">
+              <p class="text-center text-info">
+                <% const uniqueStatuses = ['كشف', 'كشف مستعجل', 'أستشارة', 'FREE']; %>
+                <% uniqueStatuses.forEach(status => {
+                    const filteredQueue = queue.filter(item => item.status === 'completed' && item.HAGZ === status);
+                    if (filteredQueue.length > 0) { %>
+                <%= status %>
+                <span class="fs-6">(<%= filteredQueue.length %>)</span>
+                <% }}); %>
+              </p>
+            </div>
+            <%Array.from(queue).filter(item => item.status === 'completed').sort((a, b) => (a.date && b.date) ? a.date - b.date : 0).forEach((item) => {%>
+            <div class="col-12 flex-column d-md-flex align-items-center gap-1 mb-3 QM-item-Container">
+              <!-- Queue item -->
+              <div class="col-12 border p-2 my-1 rounded-3 pq-info QM-item">
+                <div class="row">
+                  <div class="col-12 text-center wrd-break mb-2 mb-2">
+                    <span><%=item.patient.name%></span>
+                  </div>
+                  <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 word-wrap">
+
+                    <span>Age:<%=item.patient.age%></span>
+                    <span>Phone:</span>
+                    <span><%=item.patient.phoneNumber%></span>
+                    <span>حجز:<%=item.HAGZ%></span>
+                  </div>
+                  <div class="col-12 col-md-12 col-xl-6 d-flex flex-column gap-1 text-xl-center">
+                    <span>completed At</span>
+                    <!-- <span><%= item.date?.toLocaleString('en-US', { year: 'numeric'}) %></span> -->
+                    <span><%= item.date?.toLocaleString('en-US', {  month: 'long', day: 'numeric', }) %></span>
+                    <span><%= item.date?.toLocaleString('en-US', {  hour: 'numeric', minute: 'numeric', hour12: true }) %></span>
+                  </div>
+                </div>
+                <div class="row mt-3 mb-1">
+                  <%if (user.role === 'admin') {%>
+                  <div class="col-12">
+                    <a class="btn btn-outline-danger w-100" href="/newView/<%=item.patient.id%>">GO</a>
+                  </div>
+                  <%}%>
+          </div>
+        </div>
+        <!--  -->
+        <!-- Queue item -->
+      </div>
+      <%})%>
+                </div>
+                <!-- completed queue end -->
+              </div>
+            </div>
+            <!-- Button trigger modal -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="exampleModalLabel">Booking</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body position-relative">
+                    <!-- <form> -->
+                    <div class="fluid-container">
+                      <div class="row pb-2 border-bottom">
+                        <div class="col-12 col-md-6 mb-3">
+                          <form action="" class="formn-ph">
+                            <input type="text" class="form-control n-ph" placeholder="Name/Phone" />
+                          </form>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                          <input type="text" class="form-control nq-date" placeholder="DD-MM/YYYY" id="NPQ" required />
+                        </div>
+                        <div class="col-12 col-md-6 my-2">
+                          <label for="HAGZ" class="form-label mx-1">Appointment</label>
+                          <select name="HAGZ" id="HAGZ" class="form-select">
+                            <option value="كشف">كشف</option>
+                            <option value="كشف مستعجل">كشف مستعجل</option>
+                            <option value="أستشارة">أستشارة</option>
+                            <option value="حقن">حقن</option>
+                            <option value="FREE">FREE</option>
+                          </select>
+                        </div>
+                        <div class="col-12 col-md-6 my-2">
+                          <label for="Hold" class="form-label mx-1">&nbsp;</label>
+                          <select name="Hold" id="status" class="form-select">
+                            <option value="pending" selected>Pending</option>
+                            <option value="hold">Hold</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <textarea type="text" class="form-control" id="notes" placeholder="Notes"></textarea>
+                        </div>
+                      </div>
+                      <!-- patient item -->
+                      <div class="patient-items-container">
+
+                        <!-- patient item -->
+                        <!-- patient item -->
+                        <!-- <div class="row pb-2 border rounded-3 my-2">
+                  <div class="col-12 d-flex flex-column p-3 gap-1 fs-5">
+                    <span>Name:MGAgent</span>
+                    <span>Phone:0100xxxxxxx</span>
+                    <span>Serial:xxxxxxxxxxxxxxxx</span>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-outline-success w-100">ADD</button>
+                  </div>
+                </div> -->
+                      </div>
+                      <!-- patient item -->
+                    </div>
+                    <!-- </form> -->
+                  </div>
+                  <div class="modal-footer">
+                    <a class="btn btn-outline-danger w-100" href="/addPatientV2">New Patient?</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-secondary search-btn fs-4" data-bs-toggle="modal" data-bs-target="#SearchModal">
+            Search
+          </button>
+
+          <div class="modal fade" id="SearchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title fs-5" id="exampleModalLabel">Search For Patient's</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body position-relative">
+                  <!-- <form> -->
+                  <div class="fluid-container">
+                    <div class="row pb-2 border-bottom">
+                      <div class="col-12 mb-3">
+                        <input type="text" class="form-control  searchbynameforQ" placeholder="Name/Phone" />
+                      </div>
+
+                    </div>
+                    <!-- patient item -->
+                    <div class="patient-search-container">
+
+
+                    </div>
+                    <!-- patient item -->
+                  </div>
+                  <!-- </form> -->
+                </div>
+                <div class="modal-footer">
+                  <a class="btn btn-outline-success w-100" href="/addPatientV2">New Patient?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- of canavas chat -->
+
+          <!-- <button class="btn btn-warning chat-btn  fs-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Notes</button> -->
+
+          <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Note's For The Day</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div class="notes-contener d-flex flex-column gap-2">
+
+                <div class="row note">
+                  <div class="col-12 mb-2">
+                    <span class="text-secondary fs-5">@MGAgent</span>
+                  </div>
+                  <div class="col-12">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. At quaerat facere enim voluptas repudiandae obcaecati. Repudiandae veritatis dolores, mollitia dolorem eum fuga suscipit est eius, ratione, assumenda odio quod illum!</p>
+                  </div>
+                </div>
+                <div class="row note">
+                  <div class="col-12 mb-2">
+                    <span class="text-secondary fs-5">@MGAgent</span>
+                  </div>
+                  <div class="col-12">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. At quaerat facere enim voluptas repudiandae obcaecati. Repudiandae veritatis dolores, mollitia dolorem eum fuga suscipit est eius, ratione, assumenda odio quod illum!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="offcanavas-footer mb-3">
+              <form>
+                <div class="row px-2">
+                  <div class="col-12 my-2">
+                    <textarea type="text" class="form-control text-center border-main collectthenote" placeholder="Add Note" id="autoHeightTextarea" oninput="autoResize(this)"></textarea>
+                  </div>
+                  <div class="col-12 my-2">
+                    <button type="button" class="btn btn-outline-info w-100 addnoteincache">Add</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>

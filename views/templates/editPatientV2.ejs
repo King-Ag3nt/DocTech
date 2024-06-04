@@ -1,0 +1,123 @@
+<div class="container">
+  <form action="" class="container border my-5 px-5 py-3 rounded shadow fs-5 collectFormnewpaitentedit">
+    <div class="row">
+      <div class="col-12 col-md-6 my-2">
+        <h1 class="text-center">Patient Information</h1>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pName" class="form-label mx-1">Name:<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" value="<%= patient.name %>" id="pName" placeholder="Name" required patient-id="<%= patient._id %>" />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <label for="pDob" class="form-label mx-1">Date of Birth:<span class="text-danger">*</span></label>
+            <input type="text" id="datePicker" class="form-control dateOfDignosis" name="date" placeholder="DD-MM-YYYY" required value="<%= patient.birthDate %>" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pPhone" class="form-label mx-1">Phone:<span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="pPhone" placeholder="01xxxxxxxxxx" minlength="11" min="0" required value="<%= patient.phoneNumber %>" />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <label for="pOccupation" class="form-label mx-1">Occupation:<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="pOccupation" placeholder="Occupation" required value="<%= patient.occupation %>" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pAddress" class="form-label mx-1">Address:<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="pAddress" placeholder="Address" required value="<%= patient.area %>" />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <label for="pMaritalStatus" class="form-label mx-1">Marital Status</label>
+            <select name="marital" id="pMaritalStatus" class="form-select">
+              <option value="Single" <% if (patient.maritalStatus === 'Single') { %> selected <% } %>>Single</option>
+              <option value="Engaged" <% if (patient.maritalStatus === 'Engaged') { %> selected <% } %>>Engaged</option>
+              <option value="Married" <% if (patient.maritalStatus === 'Married') { %> selected <% } %>>Married</option>
+              <option value="Divorced" <% if (patient.maritalStatus === 'Divorced') { %> selected <% } %>>Divorced</option>
+              <option value="Widowed" <% if (patient.maritalStatus === 'Widowed') { %> selected <% } %>>Widowed</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pSex" class="form-label mx-1">Sex:<span class="text-danger">*</span></label>
+            <select name="sex" id="pSex" class="form-select" required>
+              <option value="Male" <% if (patient.sex === 'Male') { %> selected <% } %>>Male</option>
+              <option value="Female" <% if (patient.sex === 'Female') { %> selected <% } %>>Female</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <label for="pID" class="form-label mx-1">National ID:</label>
+            <input type="number" class="form-control" id="pID" minlength="14" min="0" placeholder="xxxxxxxxxxxx" value="<%= patient.idNo %>" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pCountry" class="form-label mx-1">Country:<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="pCountry" placeholder="Country" required value="<%= patient.country %>" />
+            <i id="pCountryTrigger" class="fas fa-angle-down"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 my-2">
+        <h1 class="text-center">Risk Factors</h1>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pSmoking" class="form-label mx-1">Smoking:<span class="text-danger">*</span></label>
+            <select name="smoking" id="pSmoking" class="form-select" required>
+              <option value="Current smoker" <% if (patient.smoking === 'Current smoker') { %> selected <% } %>>Current smoker</option>
+              <option value="Ex-smoker" <% if (patient.smoking === 'Ex-smoker') { %> selected <% } %>>Ex-smoker</option>
+              <option value="Never smoked" <% if (patient.smoking === 'Never smoked') { %> selected <% } %>>Never smoked</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <label for="pAlcohol" class="form-label mx-1">Alcohol:<span class="text-danger">*</span></label>
+            <select name="alcohol" id="pAlcohol" class="form-select" required>
+              <option value="NeverDrink" <% if (patient.alcohol === 'NeverDrink') { %> selected <% } %>>NeverDrink</option>
+              <option value="Lifetime abstainer" <% if (patient.alcohol === 'Lifetime abstainer') { %> selected <% } %>>Lifetime abstainer</option>
+              <option value="Current infrequent drinker" <% if (patient.alcohol === 'Current infrequent drinker') { %> selected <% } %>>Current infrequent drinker</option>
+              <option value="Current light drinker" <% if (patient.alcohol === 'Current light drinker') { %> selected <% } %>>Current light drinker</option>
+              <option value="Current moderate drinker" <% if (patient.alcohol === 'Current moderate drinker') { %> selected <% } %>>Current moderate drinker</option>
+              <option value="Current heavier drinker" <% if (patient.alcohol === 'Current heavier drinker') { %> selected <% } %>>Current heavier drinker</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center my-2">
+            <label for="pDrugAbuse" class="form-label">Drug abuse:</label>
+            <select name="pDrugAbuse" id="pDrugAbuse" class="form-select">
+              <option value="Never" <% if (patient.drugAbuse === 'Never') { %> selected <% } %>>Never</option>
+              <option value="ex-Drug abuser" <% if (patient.drugAbuse === 'ex-Drug abuser') { %> selected <% } %>>ex-Drug abuser</option>
+              <option value="mild" <% if (patient.drugAbuse === 'mild') { %> selected <% } %>>mild</option>
+              <option value="moderate" <% if (patient.drugAbuse === 'moderate') { %> selected <% } %>>moderate </option>
+              <option value="severe" <% if (patient.drugAbuse === 'severe') { %> selected <% } %>>severe</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pDrugType" class="form-label mx-1">Drug Type:</label>
+            <input type="text" class="form-control" id="pDrugType" placeholder="Drug Type:" value="<%=patient.drugType?.title%>" />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <label for="pDrugSince" class="form-label mx-1">Since When:</label>
+            <input type="text" class="form-control pDrugSince" id="datePicker" placeholder="DD-MM-YYYY" value="<%= patient && patient.drugType && patient.drugType.date ? patient.drugType.date.toISOString().split('T')[0] : '' %>" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <label for="pHeight" class="form-label mx-1">pregnancy Plans:</label>
+            <input type="text" class="form-control" name="pregnancyPlans" autocomplete="on">
+          </div>
+          <div class="col-12 col-md-6 my-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center my-5">
+            <button type="submit" class="btn btn-primary px-4">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

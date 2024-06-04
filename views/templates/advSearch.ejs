@@ -1,0 +1,104 @@
+<div class="container my-3 d-flex justify-content-center align-items-center flex-column">
+  <div class="row mb-4 w-100">
+    <div class="col-md-10 col-12">
+      <input type="text" class="form-control choices-search searchInput w-100" placeholder="Type to search..." />
+    </div>
+    <div class="col-12 col-md-2">
+      <button class="btn btn-outline-info w-100 h-100" type="butt" id="advSearchBtn " onclick="advSearch()">Search</button>
+    </div>
+  </div>
+  <div class="row gap-1 align-items-center justify-content-center main-content">
+    <!--card start-->
+
+    <%filteredData.forEach(patient => {%>
+    <div class="card col-sm-12 col-3 m-2">
+      <div class="card-items">
+        <h4><%= patient.patient.name %></h4>
+        <div class="card-list">
+          <div class="card-item1">
+            <i class="ph ph-phone"></i>
+            <span>Phone:<%= patient.patient.phoneNumber %></span>
+          </div>
+          <div class="card-item1">
+            <i class="ph ph-calendar"></i>
+            <span>DOB:<%= patient.patient.birthDate ? patient.patient.birthDate.toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : '' %></span>
+          </div>
+          <div class="card-item1">
+            <i class="ph ph-calendar"></i>
+            <span>Age :<%= patient.patient.age %></span>
+          </div>
+          <div class="card-item1">
+            <i class="ph ph-barcode"></i>
+            <span>Serial:<%= patient.patient.serial %></span>
+          </div>
+        </div>
+        <%if(user.role == 'admin'){%>
+        <a href="/newView/<%= patient.patient._id %>" class="btn btn-outline-info px-4 go-btn">Go</a>
+        <%}%>
+        </div>
+      </div>
+
+<%});%>
+
+        <!-- card end -->
+      </div>
+    </div>
+
+
+    <nav aria-label="..." class="mt-auto">
+      <ul class="pagination">
+        <li class="page-item pointer <%= currentPage == 1 ? 'disabled' : '' %>">
+          <a class="page-link" onclick="goToPage(<%= currentPage - 1 %>)">Previous</a>
+        </li>
+        <% for (let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item pointer <%= currentPage == i ? 'active' : '' %>">
+          <a class="page-link" onclick="goToPage(<%= i %>)"><%= i %></a>
+        </li>
+        <% } %>
+        <li class="page-item pointer <%= currentPage == totalPages ? 'disabled' : '' %>">
+          <a class="page-link" onclick="goToPage(<%= currentPage + 1 %>)">Next</a>
+        </li>
+      </ul>
+    </nav>
+
+
+    <script src="js/choices.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Initialize Choices.js for both search input and select input
+        const searchChoices = new Choices(".searchInput", {
+          placeholder: true,
+          searchPlaceholderValue: "Type to search",
+          removeItemButton: true, // Add this line to show the delete (X) button
+        });
+
+        const selectChoices = new Choices(".selectChoices", {
+          placeholder: true,
+          searchPlaceholderValue: "Type to search",
+          removeItemButton: true, // Add this line to show the delete (X) button
+        });
+      });
+
+
+
+      function advSearch() {
+        const adValue = document.querySelectorAll('.choices__item.choices__item--selectable');
+        let textArray = [];
+        adValue.forEach(element => {
+          const text = element.getAttribute('data-value').trim();
+          textArray.push(text);
+        });
+        const textArrayString = textArray.join(',');
+        const encodedTextArrayString = encodeURIComponent(textArrayString);
+
+        // Redirect to the search page with the textArray as a parameter and page 1
+        window.location.href = `/advSearch?page=1&keywords=${encodedTextArrayString}`;
+      }
+
+      // Function to handle pagination clicks
+      function goToPage(pageNumber) {
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('page', pageNumber);
+        window.location.href = `/advSearch?${queryParams.toString()}`;
+      }
+    </script>

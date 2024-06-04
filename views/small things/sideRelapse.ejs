@@ -1,0 +1,73 @@
+<div class="col-12 mx-3 scroll-test" style="width: 300px; max-height: 90vh; overflow-y: auto; word-break: break-word; overflow-x: hidden;">
+  <div class="col-12">
+    <h1 class="mt-5 border-bottom text-center text-info fs-1 fw-bold">DMD's</h1>
+  </div>
+  <div class="dmd container">
+    <%patient.patientRecord.forEach((record) => {%>
+    <%record?.DMD?.forEach((item) => {%>
+    <div class="row itemDMD">
+      <div class="border-bottom my-2 py-1">
+        <div class="col-12">
+          <h3 class="text-start text-warning"><%=item.Type%></h3>
+        </div>
+        <div class="col-12">
+          <h5>Started At:<%= item.startedAt?.toISOString().split('T')[0]%></h5>
+        </div>
+        <div class="col-12">
+          <h5 class="text-danger"><%= item.onGoing ? 'On Going' : 'Ended'%></h5>
+        </div>
+        <div class="col-12">
+          <h5>Ended At:<%= item.endedAt?.toISOString().split('T')[0]%></h5>
+        </div>
+        <div class="col-12">
+          <h4 class="text-start text-sec">Description</h4>
+        </div>
+        <div class="col-12">
+          <h5><%= item.description%></h5>
+        </div>
+        <div class="col-12">
+            <h4 class="text-start text-warning">Cause of DC</h4>
+        </div>
+        <div class="col-12">
+            <p><%= item.causeOfDC%></p>
+        </div>
+      </div>
+      <div class="border-bottom my-2 py-1">
+        <div class="col-12">
+          <h4 class="text-start text-primary">Adherence</h4>
+        </div>
+        <div class="col-12 fs-5">
+          <span><span class="text-sec">Statues:</span><%= item.adherence.status%></span>
+        </div>
+        <div class="col-12 fs-5">
+          <span><span class="text-sec">Duration:</span><%= item.adherence.dc%></span>
+        </div>
+        <div class="col-12">
+          <h4 class="text-warning">Cause</h4>
+        </div>
+        <div class="col-12 fs-5">
+          <p><%= item.adherence.why%></p>
+        </div>
+      </div>
+      <div class="border-bottom my-2 py-1">
+        <div class="col-12">
+          <h4 class="text-start text-primary">Adverse Events</h4>
+        </div>
+        <div class="col-12 fs-5">
+          <h5 class="text-warning">Clinic</h5>
+        </div>
+        <div class="col-12 fs-5">
+          <p><%= item.adverseEvents.clinic%></p>
+        </div>
+        <div class="col-12">
+          <h5 class="text-warning">Labs</h5>
+        </div>
+        <div class="col-12 fs-5">
+          <p><%= item.adverseEvents.labs%></p>
+        </div>
+      </div>
+    </div>
+    <%})%>
+    <%})%>
+  </div>
+</div>

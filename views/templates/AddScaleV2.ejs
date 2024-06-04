@@ -1,0 +1,285 @@
+
+<div class="fluid-container d-flex flex-column align-items-center justify-content-center p-3">
+  <div class="row d-flex flex-wrap justify-content-center align-items-center sc-cont scale-nav">
+    <div class="col-6 col-md-3 my-2 text-center">
+      <h1 class="text-info">EDSS</h1>
+    </div>
+  </div>
+  <form action="" class="container shadow px-5 py-3 border rounded sc-cont sendNewScale">
+    <h5 class="my-1 patientid " patientId ='<%=patient._id%>'>Visual:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="Visual" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>      
+      <div class="item">
+        <input class="form-check-input" type="radio" name="Visual" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="Visual" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="Visual" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="Visual" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="Visual" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="Visual" value="6" />
+        <h5 class="form-check-label">6</h5>
+      </div>
+    </div>
+    <h5 class="my-1">brainstem:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="brainstem" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="brainstem" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="brainstem" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="brainstem" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="brainstem" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="brainstem" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+    </div>
+    <h5 class="my-1">pyramidal:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="pyramidal" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="pyramidal" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="pyramidal" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="pyramidal" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="pyramidal" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="pyramidal" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="pyramidal" value="6" />
+        <h5 class="form-check-label">6</h5>
+      </div>
+    </div>
+    <h5 class="my-1">cerebellar:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="cerebellar" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="cerebellar" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="cerebellar" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="cerebellar" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="cerebellar" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="cerebellar" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+    </div>
+    <h5 class="my-1">sensory:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="sensory" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="sensory" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="sensory" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="sensory" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="sensory" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="sensory" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="sensory" value="6" />
+        <h5 class="form-check-label">6</h5>
+      </div>
+    </div>
+    <h5 class="my-1">BB:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="BB" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="BB" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="BB" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="BB" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="BB" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="BB" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="BB" value="6" />
+        <h5 class="form-check-label">6</h5>
+      </div>
+    </div>
+    <h5 class="my-1">mental:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="mental" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="mental" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="mental" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="mental" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="mental" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="mental" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+    </div>
+    <h5 class="my-1">ambulation:</h5>
+    <div class="d-flex flex-wrap w-100 gap-3 mt-1 fs-3">
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="0" checked />
+        <h5 class="form-check-label">0</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="1" />
+        <h5 class="form-check-label">1</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="2" />
+        <h5 class="form-check-label">2</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="3" />
+        <h5 class="form-check-label">3</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="4" />
+        <h5 class="form-check-label">4</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="5" />
+        <h5 class="form-check-label">5</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="6" />
+        <h5 class="form-check-label">6</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="7" />
+        <h5 class="form-check-label">7</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="8" />
+        <h5 class="form-check-label">8</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="9" />
+        <h5 class="form-check-label">9</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="10" />
+        <h5 class="form-check-label">10</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="11" />
+        <h5 class="form-check-label">11</h5>
+      </div>
+      <div class="item">
+        <input class="form-check-input" type="radio" name="ambulation" value="12" />
+        <h5 class="form-check-label">12</h5>
+      </div>
+    </div>
+    <h5 class="mt-5 my-1 text-center fs-3 text-main">EDSS Score:</h5>
+    <div class="row justify-content-center">
+      <div class="col col-md-8 col-lg-4" style="min-width: 200px">
+        <input type="text" min="0" max="10" step="0.1" name="edss" class="form-control text-center fs-2" style="max-height: 40px ; border-color: #e85588;" />
+        <h5 for="status"></h5>
+        <select name="status" id="status" class="form-select">
+          <option value="BaseLine">BaseLine</option>
+          <option value="Relapse">Relapse</option>
+          <option value="ResolvingRelapse">ResolvingRelapse</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <button class="btn btn-success mt-3 mb-2" type="submit" style="max-width: 150px">Submit</button>
+    </div>
+  </form>
+</div>

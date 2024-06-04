@@ -1,0 +1,81 @@
+
+    <form
+      action=""
+      class="container my-5 px-5 py-2 border shadow bg-light rounded refdoc-form"
+      id="referralForm"
+    >
+      <div class="row">
+        <div class="col">
+          <h1 class="text-center">Referral Doctor Form</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-16 my-1">
+          <input
+            type="text"
+            name="name"
+            class="form-control text-center fs-5 doctor_name"
+            placeholder="Doctor Name"
+            required
+          />
+        </div>
+        <div class="col-16 my-1">
+          <textarea
+            name="description"
+            class="w-100 form-control text-center fs-5 doctor_description"
+            placeholder="Doctor Description"
+            style="height: 30px; resize: none"
+          ></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="phone-space">
+          <div class="col phone-item">
+            <input
+              type="text"
+              name="phone number"
+              placeholder="Phone Number"
+              class="form-control text-center fs-5 phone_number"
+              required
+            />
+          </div>
+        </div>
+        <div class="col text-center my-2 w-50">
+          <button
+            class="btn btn-primary w-100"
+            type="button"
+            onclick="addPhone()"
+          >
+            Add Phone
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-16">
+          <input
+            type="email"
+            name="email"
+            class="form-control text-center fs-5 email_address"
+            placeholder="Email"
+          />
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-16">
+          <button class="btn btn-success w-100" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+    <script>
+      function addPhone() {
+        // Create a new input element
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "phone_number";
+        newInput.placeholder = "Phone Number";
+        newInput.className = "form-control text-center fs-5 my-1 phone_number";
+
+        // Append the new input element to the phone-space div
+        document.querySelector(".phone-space").appendChild(newInput);
+      }
+    </script>

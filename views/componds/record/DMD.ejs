@@ -1,0 +1,96 @@
+<div x-show="currentPage === 6" class="form-page" id="page-7">
+  <div class="my-3 row nophoto-row" id="l-DMD">
+    <h5>DMD</h5>
+    <div class="insidecontent border-bottom" id="DMDContainer">
+      <div class="row DMDinputs">
+        <div class="col-12 col-md-3 my-1">
+          <input type="text" class="form-control text-center titleInput" list="titleInputList" id="titleInput" placeholder="Type">
+          <datalist id="titleInputList">
+            <option value="Aubagio">
+            <option value="Avonex">
+            <option value="Betaferon">
+            <option value="Copaxone">
+            <option value="Extavia">
+            <option value="Gilenya">
+            <option value="Kesimpta">
+            <option value="Lemtrada">
+            <option value="Mavenclad">
+            <option value="Mayzent">
+            <option value="Ocrevus">
+            <option value="Plegridy">
+            <option value="Ponvory">
+            <option value="Rebif">
+            <option value="Tecfidera">
+            <option value="Tysabri">
+            <option value="Zeposia">
+          </datalist>
+        </div>
+        <div class="col-12 col-md-3 my-1">
+          <input type="text" id="datePicker" class="form-control text-center DMDSAT" placeholder="Started At" />
+        </div>
+        <div class="col-12 col-md-3 my-1 text-center ">
+          <input type="checkbox" class="form-check-input" value="On Going" name="DMD">
+          <h5 class="form-check-label ">On Going</h5>
+        </div>
+        <div class="col-12 col-md-3 my-1">
+          <input type="text" id="datePicker" class="form-control text-center DMDEAT" placeholder="Ended At" />
+        </div>
+        <div class="col-12 my-1">
+          <textarea class="form-control Description" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Description" autocomplete="on" name="DMDComment"></textarea>
+        </div>
+        <div class="col-12 my-1">
+          <textarea class="form-control causeOfDC" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Cause of DC" autocomplete="on" name="DMDCause"></textarea>
+        </div>
+        <h5 class="my-2  text-sec">Adherence</h5>
+        <div class="col-12 col-md-6 my-1">
+          <select name="Adherence" id="adhDuration" class="form-select adherenceStatus">
+            <option selected disabled value="Choose">Choose</option>
+            <option value="Full">Full</option>
+            <option value="Missing doses">Missing doses</option>
+            <option value="Occasional">Occasional</option>
+            <option value="Frequent">Frequent</option>
+            <option value="DC">DC</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-6 my-1 d-flex gap-1">
+          <input type="text" class="form-control text-center valueofDuration" placeholder="Duration" />
+          <select name="Adherence" id="adhDuration" class="form-select typeoftheDuration" style="width: 30%;">
+            <option selected disabled value="Choose">Choose</option>
+            <option value="Day">Day</option>
+            <option value="Month">Month</option>
+            <option value="Year">Year</option>
+          </select>
+        </div>
+        <div class="col-12 my-1">
+          <textarea class="form-control whytheadherence" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Why" autocomplete="on" name="DMDAD"></textarea>
+        </div>
+        <h5 class="my-2  text-sec">Adverse Events</h5>
+        <div class="col-12 my-1">
+          <textarea class="form-control Clinic" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Clinic" autocomplete="on" name="Clinic"></textarea>
+        </div>
+        <div class="col-12 my-1">
+          <textarea class="form-control Labs" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Labs" autocomplete="on" name="Labs"></textarea>
+        </div>
+        <div class="col-12 my-1 text-center ">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-3 row text-center btn-row">
+    <div class="col">
+      <button class="btn btn-outline-primary add-btn" type="button" onclick="addcloneDMD('DMDContainer')">
+        Add DMD
+      </button>
+    </div>
+  </div>
+  <div class="row mt-2">
+
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-secondary" @click="currentPage = 5; activeListItem = 5">Back</button>
+    </div>
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-primary" @click="currentPage = 7; activeListItem = 7">Next</button>
+    </div>
+  </div>
+</div>

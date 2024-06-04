@@ -1,0 +1,71 @@
+<div x-show="currentPage === 5" class="form-page" id="page-6">
+  <div class="my-3 row photo-row" id="l-Investigations">
+    <h5>Investigations Results</h5>
+    <div class="insidecontentphoto" id="investigationsResultContainer">
+      <%patient[0].patientRecord[patient[0].patientRecord.length - 1].requestRadiology.forEach(investigation => {%>
+      <div class="inputsWithPhotos">
+        <!-- type input-->
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"><%=investigation.title%></textarea>
+        </div>
+        <!-- comment input-->
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"><%=investigation.comment%></textarea>
+        </div>
+        <!-- date input-->
+        <div class="col-16 my-1">
+          <input type="text" id="datePicker" class="form-control text-center" placeholder="Date" />
+        </div>
+        <!-- imgs input-->
+        <div class="col-16 my-1">
+          <input type="file" class="form-control text-center imagesphotos" accept="image/*" multiple />
+        </div>
+        <!-- Delete btn-->
+        <div class="col-16 my-1 text-center ">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+      </div>
+      <%})%>
+      <%if(patient[0].patientRecord[patient[0].patientRecord.length - 1].requestRadiology.length == 0){%>
+      <div class="inputsWithPhotos">
+        <!-- type input-->
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"></textarea>
+        </div>
+        <!-- comment input-->
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"></textarea>
+        </div>
+        <!-- date input-->
+        <div class="col-16 my-1">
+          <input type="text" id="datePicker" class="form-control text-center" placeholder="Date" />
+        </div>
+        <!-- imgs input-->
+        <div class="col-16 my-1">
+          <input type="file" class="form-control text-center imagesphotos" accept="image/*" multiple />
+        </div>
+        <!-- Delete btn-->
+        <div class="col-16 my-1 text-center ">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+      </div>
+      <%}%>
+        </div>
+        <div class="my-3 row text-center btn-row">
+          <div class="col">
+            <button type="button" class="btn btn-outline-primary add-btn" onclick="cloneInputsWithPhotos();">
+              Add Investigations Results
+            </button>
+          </div>
+        </div>
+      
+      </div>
+      <div class="row mt-2">  
+        <div class="col-6 text-center">
+          <button type="button" class="btn btn-secondary" @click="currentPage = 4; activeListItem = 4">Back</button>
+        </div>
+        <div class="col-6 text-center">
+          <button type="button" class="btn btn-primary" @click="currentPage = 6; activeListItem = 6">Next</button>
+        </div>
+      </div>
+</div>

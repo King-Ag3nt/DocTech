@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/default.js"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="icon" type="image/png" href="/img/doctech.png">
+  <link rel="stylesheet" href="/css/login-style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <title>Login</title>
+</head>
+
+<body>
+  <div class="login-body">
+    <form class="container-sm p-5 shadow border rounded-3 login-container form-login-loglog d-flex flex-column">
+      <div class="row">
+        <div class="col-12 my-3">
+          <h4 class="text-center display-5 text-dark fw-bold fs-1">Login</h4>
+        </div>
+        <div class="col-12 fs-3">
+          <label for="E-mail" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="email" required autocomplete="on" name="email" />
+        </div>
+        <div class="col-12 fs-3 my-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" minlength="8" id="password" required name="password" autocomplete="on" />
+          <div class="row text-end">
+
+
+
+            <a href="/forgetpassword" class="text-decoration-none fs-6">Forget password ?</a>
+
+
+
+          </div>
+          <div class="row text-end">
+
+
+
+            <a href="/Pricing" class="text-decoration-none fs-6">Pricing</a>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="row mt-auto">
+        <div class="col-12 text-center my-3">
+          <button type="submit" class="btn btn-outline-info px-4 fs-5">
+            Login
+          </button>
+        </div>
+        <!-- <div class="col-12 ">
+            <p class="fs-6 my-0">Need an account ? </p>
+          </div> -->
+      </div>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  <script src="/js/bundle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<div x-show="currentPage === 4" class="form-page" id="page-5">
+  <div class="my-3 row nophoto-row" id="l-FHistory">
+    <h5>Family History</h5>
+    <div class="insidecontent" id="FhistorysContainer">
+      <div class="twoinputs row">
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" name="FhistorysType" autocomplete="on"></textarea>
+        </div>
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="FhistorysComment"></textarea>
+        </div>
+        <div class="col-16 my-1 text-center ">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-3 row text-center btn-row">
+    <div class="col">
+      <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('FhistorysContainer')">
+        Add Family History
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-secondary" @click="currentPage = 3; activeListItem = 3">Back</button>
+    </div>
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-primary" @click="currentPage = 5; activeListItem = 5">Next</button>
+    </div>
+  </div>
+
+</div>

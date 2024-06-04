@@ -1,0 +1,132 @@
+<div class="container p-5 rounded border my-5 shadow bg-light">
+  <form action="" class="row d-flex align-items-center p-0 UserSettings">
+    <div class="col-12 text-center mb-3">
+      <h3>Your Account Setting</h3>
+    </div>
+    <div class="col-12 col-md-3 col-xl-2 d-flex justify-content-center justify-content-md-start">
+      <label for="docPhoto" class="d-flex flex-column align-items-center justify-content-center gap-1 photo-label" style="cursor: pointer">
+        <img src="img/<%=user.photo%>" id="previewImage" />
+        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/doctech-33a3f.appspot.com/o/<%= encodeURIComponent(user.photo) %>?alt=media" id="previewImage"/> -->
+        <input type="file" name="doc img" id="docPhoto" accept="image/*" hidden onchange="previewPhoto(event, 'previewImage')" />
+        <span class=" text-center">Choose New Photo</span>
+      </label>
+    </div>
+    <div class="col-12 col-md-9 col-xl-10 ">
+      <label for="docName" class="form-label">Name:</label>
+      <input type="text" class="form-control " id="docName" value="<%= user.name %>" data-user-id="<%= user._id %>" />
+      <label for="docEmail" class="form-label">Email:</label>
+      <input type="text" class="form-control " id="docEmail" value="<%=user.email%>" />
+    </div>
+    <div class="row border-bottom pb-3">
+      <div class="col-12 d-flex justify-content-center justify-content-md-end">
+        <button class="btn btn-primary mt-3 px-4">Save</button>
+      </div>
+    </div>
+  </form>
+
+  <form action="" class="row my-3  UserSettingspasword">
+    <div class="col-12">
+      <label for="password" class="form-label">Old Password:</label>
+      <input type="password" class="form-control" id="oldPassword" required minlength="8" />
+    </div>
+    <div class="col-12 col-md-6 my-3">
+      <label for="newPassword" class="form-label">New Password:</label>
+      <input type="password" class="form-control" id="newPassword" required minlength="8" />
+    </div>
+    <div class="col-12 col-md-6 my-3">
+      <label for="confirmPassword" class="form-label">Confirm Password:</label>
+      <input type="password" class="form-control" id="confirmPassword" required minlength="8" />
+    </div>
+    <div class="row border-bottom pb-3">
+      <div class="col-12 d-flex justify-content-center justify-content-md-end">
+        <button class="btn btn-primary mt-3 px-4">Save</button>
+      </div>
+    </div>
+  </form>
+
+  <%if(user.role === 'admin'){%>
+
+  <div class="col-12">
+    <h3 class="text-center">Current Users</h3>
+  </div>
+  <div class="row useres-content p-3 my-3 border rounded-3 just">
+    <!-- user start -->
+    <!-- user -->
+    <%Array.from(users).filter(item => item.role !== 'admin').forEach(userr => {%>
+    <div class="col-12 col-md-6 p-0 d-flex flex-column align-items-center my-2">
+      <div class="d-flex gap-2">
+        <img src="/img/<%=userr.photo%>" id="previewImage" class="rounded-circle img-fluid sml-userimg" />
+        <div class="d-flex flex-column mt-4">
+          <h5><%=userr.name%></h5>
+          <h6 class="wrd-brk "><%=userr.email%></h6>
+          <button class="btn btn-outline-danger Delete-user" data-user-id="<%=userr._id%>" style="max-width: 130px;">Delete</button>
+        </div>
+      </div>
+    </div>
+    <%})%>
+    <!-- user end -->
+  </div>
+  <div class="row border-bottom pb-3">
+    <div class="col-12 d-flex justify-content-center justify-content-md-end">
+      <button class="btn btn-success mt-3 px-4" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD</button>
+    </div>
+  </div>
+
+
+  <%}%>
+    <div class="row my-3">
+      <div class="col-12">
+        <h3 class="text-center">Font Settings</h3>
+      </div>
+      <div class="col-12">
+        <label for="fontRange" class="form-label">Font Size</label>
+        <div class="col-6">
+          <input type="range" class="form-range fontsizevalue" id="fontRange" min="1" max="50" step="1" >
+        </div>
+        <div class="col-12">
+          <h3 class=" text-info">That's what the main Header looks like</h3>
+          <h5 class=" text-warning">That's what the sub Header looks like</h5>
+          <p >That's what the paragraph looks like</p>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- modal place -->
+<div class="modal fade fs-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-fullscreen-sm-down modal-dialog-centered">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title " id="staticBackdropLabel">Add User</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="modal-body fluid-container creating-user">
+        <div class="row">
+          <div class="col-12">
+            <label for="userName" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="userName" required />
+          </div>
+          <div class="col-12 my-3">
+            <label for="userEmail" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="userEmail" required>
+          </div>
+
+          <div class="col-12 col-md-6 my-3">
+            <label for="userPassword" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="userPassword" required minlength="8" />
+          </div>
+          <div class="col-12 col-md-6 my-3">
+            <label for="userConfirmPassword" class="form-label">Confirm Password:</label>
+            <input type="password" class="form-control" id="userConfirmPassword" required minlength="8" />
+          </div>
+        </div>
+        <div class="row  pb-3">
+          <div class="col-12 d-flex justify-content-center">
+            <button class="btn btn-primary mt-3 px-4">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- modal place end -->
+</div>

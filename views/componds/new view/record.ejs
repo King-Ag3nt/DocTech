@@ -1,0 +1,318 @@
+<div class="accordion accordion-flush w-100 shadow data-container" id="RecordAccordion">
+  <!-- item start -->
+  <% patient.patientRecord.forEach((record , index) => {%>
+  <div class="accordion-item">
+    <h3 class="accordion-header">
+      <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=index%>" aria-expanded="false" aria-controls="flush-collapse<%=index%>">
+        <h5 class="diagnosePrintat wrd-brk me-2"><%=record.diagnose?.title || 'No Data Found'%></h5><h5 class="createdAtPrint"><%=record.createdAt%></h5>
+      </button>
+    </h3>
+    <div id="flush-collapse<%=index%>" class="accordion-collapse collapse wrd-brk" data-bs-parent="#RecordAccordion">
+      <div class="accordion-body">
+        <div class="container w-100">
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">diagnosis</h3>
+            </div>
+            <div class="col-12">
+              <h5 class="text-warning"><%=record.diagnose?.title || 'No Data Found'%></h5>
+            </div>
+            <div class="col-12">
+              <p class="p-text">Date of onset:<%=record.diagnose?.dateOfOnSet%></p>
+              <p class="p-text">Date of Diagnosis:<%=record.diagnose?.dateOfDignosis%></p>
+            </div>
+          </div>
+          <hr />
+          <!-- dmd start -->
+
+          <div class="row tnd  border-bottom py-2">
+            <div class="col-12">
+              <h3 class="text-info  fw-bold">DMD's</h3>
+            </div>
+            <% record.DMD?.forEach((element) => {%>
+            <div>
+              <div class="border-bottom py-2">
+                <div class="col-12 ">
+                  <h5 class="text-warning "><%=element?.Type%></h5>
+                  <div class="row text-md-center">
+                    <%if(element?.startedAt){%>
+                    <div class="col-12 col-md-4">
+                      <p class="p-text">Started At:<%=element?.startedAt.toISOString().split('T')[0]%></p>
+                    </div>
+                    <%} %>
+                    <div class="col-12 col-md-4">
+                      <% if(element.onGoing){ %>
+                      <p class="text-danger">On Going</p>
+                      <% } %>
+                    </div>
+                    <% if(element.endedAt){ %>
+                    <div class="col-12 col-md-4">
+                      <p class="p-text">Ended At:<%=element?.endedAt?.toISOString().split('T')[0]%></p>
+                    </div>
+                    <% } %>
+                  </div>
+                </div>
+                <% if(element.description){ %>
+                <div class="col-12">
+                  <h5 class="text-sec">Description</h5>
+                  <p class="p-text"><%=element?.description%></p>
+                </div>
+                <% } %>
+                <% if(element.why){ %>
+                <div class="col-12">
+                  <h5 class="text-sec">Cause of DC</h5>
+                  <p class="p-text"><%=element?.causeOfDC%></p>
+                </div>
+                <% } %>
+              </div>
+              <% if(element.adherence.status !== 'Choose' || element.adherence.why.lengh > 0) { %>
+              <div class="border-bottom py-2">
+                <div class="col-12">
+                  <h5 class="text-primary ">Adherence</h5>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="p-text"><span class="text-sec mx-2">Statues:</span><%=element?.adherence.status%></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="p-text"><span class="text-sec mx-2">Duration:</span><%=element?.adherence.dc%></p>
+                    </div>
+                  </div>
+                  <h4 class="text-warning">Cause</h4>
+                  <P class="p-text"><%=element?.adherence.why || 'No Data Found'%></P>
+                </div>
+              </div>
+              <% } %>
+              <% if(element.adverseEvents.clinic || element.adverseEvents.labs){ %>
+              <div class="col-12 py-2">
+                <h5 class="text-primary ">Adverse Events</h5>
+                <h4 class="text-warning">Clinic</h4>
+                <p class="p-text"><%= element?.adverseEvents.clinic %></p>
+                <h4 class="text-warning">Labs</h4>
+                <p class="p-text"><%= element?.adverseEvents.labs %></p>
+              </div>
+              <% } %>
+            </div>
+            <% }) %>
+          </div>
+          <!-- dmd end -->
+          <div class="row tnd  mt-2">
+            <div class="col-12">
+              <h3 class="text-info">Complain</h3>
+            </div>
+            <% record.complaints?.forEach((element) => {%>
+            <div class="col-12">
+              <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+            </div>
+            <div class="col-12">
+              <p class="p-text"><%=element.comment || element.description%></p>
+            </div>
+            <%})%>
+          </div>
+          <hr />
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Past Medical Histories</h3>
+            </div>
+            <% record.pastMedicalHistories?.forEach((element) => { %>
+            <div class="col-12">
+              <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+            </div>
+            <div class="col-12">
+              <p class="p-text"><%=element.comment || element.description%></p>
+            </div>
+            <%})%>
+          </div>
+          <hr />
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Family History</h3>
+            </div>
+            <% record.familyHistory?.forEach((element) => { %>
+            <div class="col-12">
+              <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+            </div>
+            <div class="col-12">
+              <p class="p-text"><%=element.comment || element.description%></p>
+            </div>
+            <%})%>
+          </div>
+          <hr />
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Investigations Results</h3>
+            </div>
+            <% record.pastRadiology?.forEach((element) => { %>
+            <div class="col-12">
+              <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+            </div>
+            <div class="col-12">
+              <p class="p-text"><%=element.comment || element.description%></p>
+              <p class="p-text">Date: <%=element.date?.toISOString().split('T')[0]%></p>
+            </div>
+            <div class="col view-img">
+              <%element.img?.forEach((image) => {%>
+              <a href="/img/MRI/<%=image%>" data-lightbox="<%=element._id%>" data-title="<%=element.title || 'No Data Found'%>">
+                <img class="youneek" src="/img/MRI/<%=image%>">
+              </a>
+              <%})%>
+            </div>
+            <% }) %>
+          </div>
+          <hr />
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Past Medications</h3>
+            </div>
+            <% record.presentMedicalHistories?.forEach((element) => { %>
+            <div class="col-12 wrd-brk">
+              <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+            </div>
+            <div class="col-12 wrd-brk">
+              <p class="p-text"><%=element.comment || element.description%></p>
+            </div>
+            <%})%>
+          </div>
+          <hr/>
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Vital Information</h3>
+            </div>
+            <% record.vitalInformation?.forEach((element) => { %>
+            <div class="col-12">
+              <% if (element.title) { %>
+              <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+              <% } %>
+              <% if (element.date) { %>
+              <h5 class="text-warning"><%= element?.date?.toISOString().split('T')[0]  %></h5>
+              <% } %>
+            </div>
+            <div class="col-12">
+              <p class="p-text"><%=element.comment || element.description%></p>
+            </div>
+            <div class="row d-flex">
+              <div class="col-6 col-md-6 d-flex text-center border p-2 gap-1 align-items-center">
+                <h5 class="text-sec">weight:</h5>
+                <h5><%= element?.weight%></h5>
+              </div>
+              <div class="col-6 col-md-6 d-flex text-center border p-2 gap-1 align-items-center">
+                <h5 class="text-sec">height:</h5>
+                <h5><%= element?.height%></h5>
+              </div>
+              <div class="col-12 col-md-6 d-flex text-center border p-2 gap-1 align-items-center">
+                <h5 class="text-sec">Blood Pressure:</h5>
+                <h5><%= element?.bloodPressure%></h5>
+              </div>
+              <div class="col-12 col-md-6 d-flex text-center border p-2 gap-1 align-items-center">
+                <h5 class="text-sec">pulse Rate:</h5>
+                <h5><%= element?.pulseRate%></h5>
+              </div>
+              <div class="col-12 col-md-6 d-flex text-center border p-2 gap-1 align-items-center">
+                <h5 class="text-sec">Blood Sugar:</h5>
+                <h5><%= element?.bloodSugar%></h5>
+              </div>
+              <div class="col-12 col-md-6 d-flex text-center border p-2 gap-1 align-items-center">
+                <h5 class="text-sec">BMI:</h5>
+                <h5>
+                  <%= element?.weight && element?.height ? (element.weight.split(' ')[0] / Math.pow(element?.height.split(' ')[0] / 100, 2)) : 'Weight or height not available' %>
+                </h5>
+              </div>
+            </div>
+            <%})%>
+          </div>
+          <hr />
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Examination</h3>
+            </div>
+            <% record.examination?.forEach((element) => { %>
+            <div class="col-12">
+              <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+            </div>
+            <div class="col-12">
+              <p class="p-text"><%=element.comment || element.description%></p>
+            </div>
+            <%})%>
+          </div>
+          <hr />
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Plan</h3>
+            </div>
+            <div class="col-12">
+              <p class="p-text"><%=record.plan%></p>
+            </div>
+          </div>
+          <hr />
+          <div class="row tnd  radiologyContinergamed">
+            <div class="col-12">
+              <h3 class="text-info">Requested Investigations</h3>
+            </div>
+            <% record.requestRadiology?.forEach((element) => { %>
+            <div class="sectionradio">
+              <div class="col-12 radiologyType">
+                <h5 class="text-warning"><%=element.title || 'No Data Found'%> </h5>
+              </div>
+              <div class="col-12 radiologyComment">
+                <p class="p-text"><%=element.comment || element.description%></p>
+              </div>
+            </div>
+            <%})%>
+          </div>
+          <hr />
+          <div class="row tnd  medicationPrint">
+            <div class="col-12">
+              <h3 class="text-info">Current Medications</h3>
+            </div>
+            <% record.currentMedications?.forEach((element) => { %>
+            <div class="medecationContinergamed">
+              <div class="col-12 medicationType">
+                <h5 class="text-warning"><%=element.title || 'No Data Found'%></h5>
+              </div>
+              <div class="col-12 medicationComment">
+                <p class="p-text"><%=element.comment || element.description%></p>
+              </div>
+              <% if (element.startedAt && element.endedAt ) { %>
+              <div class="col-12">
+                <p class="p-text">Started At: <%= element.startedAt instanceof Date ? element.startedAt.toISOString().split('T')[0] : element.startedAt %></p>
+                <p class="p-text">Ended At: <%= element.endedAt instanceof Date ? element.endedAt.toISOString().split('T')[0] : element.endedAt %></p>
+              </div>
+              <% } else if (element.startedAt ) { %>
+              <div class="col-12">
+                <p class="p-text">Started At: <%= element.startedAt.toISOString().split('T')[0] %>,OnGoing</p>
+              </div>
+              <% } %>
+            </div>
+            <%})%>
+          </div>
+          <%if(record.note){%>
+          <hr />
+          <div class="row tnd ">
+            <div class="col-12">
+              <h3 class="text-info">Note</h3>
+            </div>
+            <div class="col-12">
+              <p class="Noteprint"><%=record.note%></p>
+            </div>
+          </div>
+          <%}%>
+          <div class="row btn-cont w-100 border-top pt-4">
+            <div class="col-4 center">
+              <i class="ph ph-bold ph-trash trashBin" recordId="<%=record._id%>"></i>
+        </div>
+        <div class="col-4 center">
+          <a href="/editRecordV2/<%=record._id%>" class="text-dark"><i class="ph-duotone ph-pencil-line recordEdit"></i></a>
+        </div>
+        <div class="col-4 center mainPrintRec">
+          <i recordIdPrint="<%=record._id%>" class="ph-bold ph-printer printclassbtn"></i>
+        </div>
+      </div>
+      <!-- last tnd -->
+    </div>
+  </div>
+</div>
+</div>
+<%})%>
+<!-- item end -->
+</div>

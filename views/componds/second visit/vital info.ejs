@@ -1,0 +1,80 @@
+<div x-show="currentPage === 7" class="form-page" id="page-8">
+
+  <div class="my-3 row nophoto-row">
+    <!-- <h5>Vital Information</h5> -->
+    <div class="insidecontent" id="vitalInformationContainer">
+      <div class="twoinputs row">
+        <div class="col-12 my-1">
+          <!-- dont play with row lw 3ayz t3mlha w 2na t7t seb 2l row w 5od 2ly gowah copy m3ak l7d col-12 2na m5le kol wa7d col-2 f m3ak kman 5 msln-->
+          <div class="row d-flex justify-content-start">
+            <!-- copy this start -->
+            <div class="col-6 col-md-3 d-flex flex-column gap-1 my-1">
+              <h5 for="weight" class="form-label text-sec mx-1 ">weight</h5>
+              <div class="d-flex gap-1 p-0">
+                <input type="number" name="weight" id="weight" placeholder="weight" class="form-control weight" min="1" step=".01">
+                <select name="weight" class="form-select weighttype">
+                  <option value="KG">KG</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3 d-flex flex-column gap-1 my-1">
+              <h5 for="height" class="form-label text-sec mx-1 ">height</h5>
+              <div class="d-flex gap-1 p-0">
+                <input type="number" name="height" id="height" placeholder="height" class="form-control height" min="1" step=".01">
+                <select name="height" class="form-select heighttype">
+                  <option value="cm">cm</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+              <h5 for="bloodPressure" class="form-label text-sec mx-1 ">Blood Pressure</h5>
+              <div class="d-flex gap-1 p-0">
+                <input type="text" name="Blood Pressure" id="bloodPressure" placeholder="Blood Pressure" class="form-control bloodPressure">
+                <select name="Blood Pressure" class="form-select bloodPressuretype">
+                  <option value="mmHg">mmHg</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+              <h5 for="pulseRate" class="form-label text-sec mx-1 ">pulse Rate</h5>
+              <div class="d-flex gap-1 p-0">
+                <input type="number" name="pulse Rate" id="pulseRate" placeholder="pulse Rate" class="form-control pulseRate" min="1" step=".01">
+                <select name="pulse Rate" class="form-select pulseRatetype">
+                  <option value="mmHg">BPM</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+              <h5 for="bloodSugar" class="form-label text-sec mx-1 ">Blood Sugar</h5>
+              <div class="d-flex gap-1 p-0">
+                <input type="number" name="bloodSugar" id="bloodSugar" placeholder="Blood Sugar" class="form-control bloodSugar" min="1" step=".01">
+                <select name="bloodSugar" class="form-select bloodSugartype">
+                  <option value="mg/dL">mg/dL</option>
+                  <option value="mmol/L">mmol/L</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+              <h5 for="datePicker" class="form-label text-sec mx-1 ">Date</h5>
+              <input type="text" id="datePicker" class="form-control text-center dateofthevital" placeholder="Date" />
+            </div>
+            <!-- copy this end  -->
+          </div>
+          <!-- row end  -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-secondary" @click="currentPage = 6; activeListItem = 6">Back</button>
+    </div>
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-primary" @click="currentPage = 8; activeListItem = 8">Next</button>
+    </div>
+  </div>
+</div>

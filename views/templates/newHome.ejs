@@ -1,0 +1,82 @@
+<!-- main content start -->
+<div class="container my-3 d-flex justify-content-center align-items-center flex-column">
+  <div class="row mb-4 w-100 align-items-center justify-content-center">
+    <form action="" class="form w-100 d-flex justify-content-center align-items-center homeSearch">
+      <input type="search" class="home-search fs-4" placeholder="search" />
+    </form>
+    <div class="col-5 text-end mt-2">
+      <a href="/advSearch" class="adv-btn">Advanced?</a>
+    </div>
+  </div>
+  <div class="row gap-1 align-items-center justify-content-center main-content">
+    <!--card start-->
+    <%patients.forEach((patient) => {%>
+    <div class="card col-sm-12 col-3 m-2">
+      <div class="card-items">
+        <h4><%= patient.name %></h4>
+        <div class="card-list">
+          <div class="card-item1">
+            <i class="ph ph-phone"></i>
+            <span>Phone:<%= patient.phoneNumber %></span>
+          </div>
+          <div class="card-item1">
+            <i class="ph ph-calendar"></i>
+            <span>DOB:<%= patient.birthDate %></span>
+          </div>
+          <div class="card-item1">
+            <i class="ph ph-calendar"></i>
+            <span>Age :<%= patient.age %></span>
+          </div>
+          <div class="card-item1">
+            <i class="ph ph-barcode"></i>
+            <span>Serial:<%= patient.serial %></span>
+          </div>
+        </div>
+        <%if(user.role == 'admin'){%>
+        <a href="/newView/<%= patient._id %>" class="btn btn-outline-info px-4 go-btn">Go</a>
+        <%}else{%>
+        <div class="row w-100 mt-3 CREATEFASTQ" style="height: fit-content;">
+          <div class="col-6 d-flex justify-content-center align-items-center">
+            <button class="btn btn-outline-info addtoqueueincase px-4 go-btn" PATIENTID="<%= patient._id %>">ADD</button>
+          </div>
+          <div class="col-6 d-flex justify-content-center align-items-center">
+            <select class="form-select kshf">
+              <option value="كشف">كشف</option>
+              <option value="كشف مستعجل">كشف مستعجل</option>
+              <option value="أستشارة">أستشارة</option>
+              <option value="حقن">حقن</option>
+              <option value="FREE">FREE</option>
+            </select>
+          </div>
+        </div>
+        <%}%>
+        </div>
+      </div>
+      <%});%>
+        <!-- card end -->
+      </div>
+    </div>
+    <nav aria-label="..." class="mt-auto">
+      <ul class="pagination">
+        <li class="page-item <%= currentPage == 1 ? 'disabled' : ''%>">
+          <a class="page-link page-nm" href="<%='/?page='+(currentPage-1)%>">Previous</a>
+        </li>
+
+        <% 
+        const pagesToShow = 3; // Number of pages to show after the current page
+        const pagesBefore = 2; // Number of pages to show before the current page
+        const startPage = Math.max(currentPage - pagesBefore, 1);
+        const endPage = Math.min(currentPage + pagesToShow, totalPages);
+  
+        for(let i = startPage; i <= endPage; i++) {
+      %>
+        <li class="page-item <%= currentPage == i ? 'active' : ''%>">
+          <a class="page-link" href="/?page=<%=i%>"><%=i%></a>
+        </li>
+        <% } %>
+
+        <li class="page-item <%= currentPage == totalPages ? 'disabled' : ''%>">
+          <a class="page-link" href="<%='/?page='+(currentPage+1)%>">Next</a>
+        </li>
+      </ul>
+    </nav>

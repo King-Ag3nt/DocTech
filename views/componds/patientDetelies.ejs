@@ -1,0 +1,45 @@
+  <div class="row gap-2 my-3 shadow patient-info bg-light p-3">
+    <div class="col">
+      <img src="/img/default.jpg" width="100px" class="rounded-circle" />
+    </div>
+    <div class="col d-flex flex-column gap-1 main-info break">
+      <h4 class="patientsName fs-5" serial-of-patient="<%=patient.serial%>"><%=patient.name%></h4>
+      <span> serial:<%=patient.serial%> </span>
+      <a href="/editPatientV2/<%=patient._id%>">Edit</a>
+      <div class="form-check form-switch my-2">
+        <input class="form-check-input checkingofhorzontal" type="checkbox" role="switch" id="flexSwitchCheckDefault" <%= user.typeOfRecord ? 'checked' : '' %>>
+        <h4 class="form-check-label fs-5" for="flexSwitchCheckDefault">Horizontal</h4>
+      </div>
+    </div>
+    <div class="col d-flex flex-column break">
+      <h4 class="info">info</h4>
+      <span><%= patient.birthDate%></span>
+      <span>Age:<%=patient.age%></span>
+      <span>country:<%=patient.country%></span>
+    </div>
+    <div class="col d-flex flex-column break">
+      <h4 class="info">contact</h4>
+      <span>Number:<%=patient.phoneNumber%></span>
+      <span>Address:<%=patient.area%></span>
+    </div>
+    <div class="col d-flex flex-column break">
+      <h4 class="info">Habits</h4>
+      <% if (patient.smoking) { %>
+      <span>
+        <%= patient.smoking %>
+      </span>
+      <% } %>
+      <% if (patient.drugAbuse) { %>
+      <span>Drug abuse:<%= patient.drugAbuse %></span>
+      <% } %>
+      <% if (patient.drugType && patient.drugType.date) { %>
+      <span>Since: <%= patient.drugType.date.toISOString().split('T')[0] %></span>
+      <% } %>
+      <% if (patient.drugType && patient.drugType.title) { %>
+      <span>Drug Type: <%= patient.drugType.title %></span>
+      <% } %>
+      <% if (patient.alcohol) { %>
+      <span>Alcohol:<%= patient.alcohol %></span>
+      <% } %>
+    </div>
+  </div>

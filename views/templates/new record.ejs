@@ -1,0 +1,32 @@
+<!-- navbar end -->
+<!-- main content start -->
+<div class="container m-0 d-flex  m-con justify-content-md-end justify-content-center" x-data="{ currentPage: 0, activeListItem: 0 }">
+    <div class="row w-100" id="app">
+      <div class="col-12 px-0" id="content">
+        <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+          <form class="container my-5 fs-5 border p-3 rounded collectForm bg-light">
+            <h1 class="text-center text-danger">Patient Record Form</h1>
+            <%- include('../componds/record/Diagnosis.ejs') %>
+            <%- include('../componds/record/complaints.ejs') %>
+            <%- include('../componds/record/past med.ejs') %>
+            <%- include('../componds/record/family his.ejs') %>
+            <%- include('../componds/record/invistigation res.ejs') %>
+            <%- include('../componds/record/past med his.ejs') %>
+            <%- include('../componds/record/DMD.ejs') %>
+            <%- include('../componds/record/vital info.ejs') %>
+            <%- include('../componds/record/examination.ejs') %>
+            <%- include('../componds/record/requested inv.ejs') %>
+            <%- include('../componds/record/current med.ejs') %>
+            <div class="row Submit-btn mt-5">
+              <div class="col-12 text-center my-1">
+                <button class="btn btn-success add-btn" type="submit">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include('../small things/recordNav.ejs') %>
+  </div>

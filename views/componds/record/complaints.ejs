@@ -1,0 +1,38 @@
+<div x-show="currentPage === 1" class="form-page" id="page-2">
+
+  <div class="my-3 row nophoto-row" id="l-Complaints">
+    <h5>Complaints</h5>
+    <!-- items container -->
+    <div class="insidecontent" id="complaintsContainer">
+      <div class="twoinputs row">
+        <!-- content -->
+        <div class="col-12 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="complaintsType"></textarea>
+        </div>
+        <div class="col-12 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="complaintsComment"></textarea>
+        </div>
+        <div class="col-12 my-1 text-center">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+        <!-- content -->
+      </div>
+    </div>
+  </div>
+  <div class="my-3 row text-center btn-row">
+    <div class="col">
+      <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('complaintsContainer')">
+        Add Complaint
+      </button>
+    </div>
+  </div>
+  <div class="row mt-2">
+
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-secondary" @click="currentPage = 0; activeListItem = 0">Back</button>
+    </div>
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-primary" @click="currentPage = 2; activeListItem = 2">Next</button>
+    </div>
+  </div>
+</div>

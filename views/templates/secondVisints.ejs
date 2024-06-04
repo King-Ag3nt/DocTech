@@ -1,0 +1,683 @@
+<!-- navbar end -->
+<!-- main content start -->
+<div class="container m-0 d-flex  m-con w-100 justify-content-center">
+  <div class="row my-5 mx-3 ml-3 py-5 px-2  rounded sticky">
+    <!-- left-information space -->
+    <%- include('../small things/sideRecord.ejs') %>
+  </div>
+  <div class="row w-sm-100">
+    <div class="col ">
+      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+        <form class="container my-5  border p-3 rounded collectForm bg-light">
+          <h1 class="text-center text-danger">Patient Record Form</h1>
+          <div class="my-3 row main-row">
+            <div class="col-16 my-1">
+              <h5 for="" class="fw-bold " id="l-Diagnosis"> Diagnosis:</h5>
+              <textarea class="form-control diagnosiss" id="autoHeightTextarea" oninput="autoResize(this)" autocomplete="on" name="Diagnosis"><%=patient[0].patientRecord[patient[0].patientRecord.length - 1].diagnose.title%></textarea>
+            </div>
+            <div class="col col-md-6 my-1">
+              <h5 for="" class="fw-bold">Date Of Onset:</h5>
+              <input type="text" id="datePicker" class="form-control dateOfOnSet" value="<%=patient[0].patientRecord[patient[0].patientRecord.length - 1].diagnose.dateOfOnSet%>" />
+            </div>
+            <div class="col-12 col-md-6 my-1">
+              <h5 for="" class="fw-bold">Date Of Diagnosis:</h5>
+              <input type="text" id="datePicker" class="form-control dateOfDignosis" value="<%=patient[0].patientRecord[patient[0].patientRecord.length - 1].diagnose.dateOfDignosis%>" />
+            </div>
+            <div class="col-12 my-3">
+              <div class="row ">
+                <div class="col-6 text-center">
+                  <a href="/relapses/<%=patient[0].serial%>" target='_blank'>Relapses</a>
+                </div>
+                <div class="col-6 text-center">
+                  <a href="/AddScaleV2/<%=patient[0]._id%>" target="_blank">Scale</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- dmd -->
+          <%if(patient[0].patientRecord[patient[0].patientRecord.length - 1].DMD){%>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed main-border  fw-bold " type="button" data-bs-toggle="collapse" data-bs-target="#collapseDMD" aria-expanded="false" aria-controls="collapseDMD">
+                  <h5>
+                    DMD
+                  </h5>
+                </button>
+              </h2>
+              <div id="collapseDMD" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="my-3 row nophoto-row" id="l-DMD">
+                    <div class="insidecontent border-bottom" id="DMDContainer">
+                      <% patient[0].patientRecord[patient[0].patientRecord.length - 1].DMD.forEach(item => { %>
+                      <div class="row DMDinputs">
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" class="form-control text-center titleInput" list="titleInputList" id="titleInput" placeholder="Type" value="<%=item?.Type%>">
+                          <datalist id="titleInputList">
+                            <option value="Aubagio">
+                            <option value="Avonex">
+                            <option value="Betaferon">
+
+                            <option value="Copaxone">
+                            <option value="Extavia">
+                            <option value="Gilenya">
+                            <option value="Kesimpta">
+                            <option value="Lemtrada">
+                            <option value="Mavenclad">
+                            <option value="Mayzent">
+                            <option value="Ocrevus">
+                            <option value="Plegridy">
+                            <option value="Ponvory">
+                            <option value="Rebif">
+                            <option value="Tecfidera">
+                            <option value="Tysabri">
+                            <option value="Zeposia">
+                          </datalist>
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" id="datePicker" class="form-control text-center DMDSAT" placeholder="Started At" value="<%=item?.startedAt%>" />
+                        </div>
+                        <div class="col-12 col-md-3 my-1 text-center">
+                          <input type="checkbox" class="form-check-input" value="On Going" name="DMD" id="onGoingCheckbox" <% if (item?.onGoing) { %> checked <% } %>>
+                          <h5 class="form-check-label ">On Going</h5>
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" id="datePicker" class="form-control text-center DMDEAT" placeholder="Ended At" value="<%=item?.endedAt%>" />
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Description" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Description" autocomplete="on" name="DMDComment"><%=item?.description%></textarea>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control causeOfDC" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Cause of DC" autocomplete="on" name="DMDCause"><%=item?.causeOfDC%></textarea>
+                        </div>
+                        <h5 class="my-2  text-sec">Adherence</h5>
+                        <div class="col-12 col-md-6 my-1">
+                          <select name="Adherence" id="adhDuration" class="form-select adherenceStatus">
+                            <option value="Choose" <% if (item?.adherence?.status === 'Choose') { %> selected <% } %>>Choose</option>
+                            <option value="Full" <% if (item?.adherence?.status === 'Full') { %> selected <% } %>>Full</option>
+                            <option value="Missing doses" <% if (item?.adherence?.status === 'Missing doses') { %> selected <% } %>>Missing doses</option>
+                            <option value="Occasional" <% if (item?.adherence?.status === 'Occasional') { %> selected <% } %>>Occasional</option>
+                            <option value="Frequent" <% if (item?.adherence?.status === 'Frequent') { %> selected <% } %>>Frequent</option>
+                            <option value="DC" <% if (item?.adherence?.status === 'DC') { %> selected <% } %>>DC</option>
+                          </select>
+                        </div>
+                        <div class="col-12 col-md-6 my-1 d-flex gap-1">
+                          <input type="text" class="form-control text-center valueofDuration" placeholder="Duration" value="<%= (item?.adherence?.dc && item?.adherence?.dc.split(' ')[0]) || '' %>" />
+                          <select name="Adherence" id="adhDuration" class="form-select typeoftheDuration" style="width: 30%;">
+                            <option value="Choose" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Choose') { %> selected <% } %>>Choose</option>
+                            <option value="Day" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Day') { %> selected <% } %>>Day</option>
+                            <option value="Month" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Month') { %> selected <% } %>>Month</option>
+                            <option value="Year" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Year') { %> selected <% } %>>Year</option>
+                          </select>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control whytheadherence" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Why" autocomplete="on" name="DMDAD"><%=item?.why%></textarea>
+                        </div>
+                        <h5 class="my-2  text-sec">Adverse Events</h5>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Clinic" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Clinic" autocomplete="on" name="Clinic"><%=item?.adverseEvents?.clinic%></textarea>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Labs" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Labs" autocomplete="on" name="Labs"><%=item?.adverseEvents?.labs%></textarea>
+                        </div>
+                        <div class="col-12 my-1 text-center ">
+                          <i class="ph ph-bold ph-x"></i>
+                        </div>
+                      </div>
+                      <% }); %>
+                    </div>
+                  </div>
+                  <div class="my-3 row text-center btn-row">
+                    <div class="col">
+                      <button class="btn btn-outline-primary add-btn" type="button" onclick="addcloneDMD('DMDContainer')">
+                       <h5>
+                        Add DMD
+                       </h5>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%}else{%>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed main-border  fw-bold " type="button" data-bs-toggle="collapse" data-bs-target="#collapseDMD" aria-expanded="false" aria-controls="collapseDMD">
+                  <h5>
+                    DMD
+                  </h5>
+                </button>
+              </h2>
+              <div id="collapseDMD" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="my-3 row nophoto-row" id="l-DMD">
+
+                    <div class="insidecontent border-bottom" id="DMDContainer">
+                      <div class="row DMDinputs">
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" class="form-control text-center titleInput" list="titleInputList" id="titleInput" placeholder="Type">
+                          <datalist id="titleInputList">
+                            <option value="Aubagio">
+                            <option value="Avonex">
+                            <option value="Betaferon">
+
+                            <option value="Copaxone">
+                            <option value="Extavia">
+                            <option value="Gilenya">
+                            <option value="Kesimpta">
+                            <option value="Lemtrada">
+                            <option value="Mavenclad">
+                            <option value="Mayzent">
+                            <option value="Ocrevus">
+                            <option value="Plegridy">
+                            <option value="Ponvory">
+                            <option value="Rebif">
+                            <option value="Tecfidera">
+                            <option value="Tysabri">
+                            <option value="Zeposia">
+                          </datalist>
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" id="datePicker" class="form-control text-center DMDSAT" placeholder="Started At" />
+                        </div>
+                        <div class="col-12 col-md-3 my-1 text-center ">
+                          <input type="checkbox" class="form-check-input" value="On Going" name="DMD">
+                          <h5 class="form-check-label ">On Going</h5>
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" id="datePicker" class="form-control text-center DMDEAT" placeholder="Ended At" />
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Description" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Description" autocomplete="on" name="DMDComment"></textarea>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control causeOfDC" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Cause of DC" autocomplete="on" name="DMDCause"></textarea>
+                        </div>
+                        <h5 class="my-2  text-sec">Adherence</h5>
+                        <div class="col-12 col-md-6 my-1">
+                          <select name="Adherence" id="adhDuration" class="form-select adherenceStatus">
+                            <option value="Full">Full</option>
+                            <option value="Missing doses">Missing doses</option>
+                            <option value="Occasional">Occasional</option>
+                            <option value="Frequent">Frequent</option>
+                            <option value="DC">DC</option>
+                          </select>
+                        </div>
+                        <div class="col-12 col-md-6 my-1 d-flex gap-1">
+                          <input type="text" class="form-control text-center valueofDuration" placeholder="Duration" />
+                          <select name="Adherence" id="adhDuration" class="form-select typeoftheDuration" style="width: 30%;">
+                            <option value="Day">Day</option>
+                            <option value="Month">Month</option>
+                            <option value="Year">Year</option>
+                          </select>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control whytheadherence" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Why" autocomplete="on" name="DMDAD"></textarea>
+                        </div>
+                        <h5 class="my-2  text-sec">Adverse Events</h5>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Clinic" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Clinic" autocomplete="on" name="Clinic"></textarea>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Labs" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Labs" autocomplete="on" name="Labs"></textarea>
+                        </div>
+                        <div class="col-12 my-1 text-center ">
+                          <i class="ph ph-bold ph-x"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="my-3 row text-center btn-row">
+                    <div class="col">
+                      <button class="btn btn-outline-primary add-btn" type="button" onclick="addcloneDMD('DMDContainer')">
+                        Add DMD
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%}%>
+          <!-- dmd -->
+          <div class="my-3 row nophoto-row" id="l-Complaints">
+            <h5>Complaints</h5>
+            <!-- items container -->
+            <div class="insidecontent" id="complaintsContainer">
+              <div class="twoinputs row">
+                <!-- content -->
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="complaintsType"></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="complaintsComment"></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+                <!-- content -->
+              </div>
+            </div>
+          </div>
+          <div class="my-3 row text-center btn-row">
+            <div class="col">
+              <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('complaintsContainer')">
+                Add Complaint
+              </button>
+            </div>
+          </div>
+          <!-- item -->
+          <div class="my-3 row nophoto-row" id="l-MHistories">
+            <h5>Past Medical Histories</h5>
+            <div class="insidecontent" id="MhistorysContainer">
+              <div class="twoinputs row">
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="MhistorysType"></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="MhistorysComment"></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- item -->
+
+          <div class="my-3 row text-center btn-row">
+            <div class="col">
+              <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('MhistorysContainer')">
+                Add Medical Histories
+              </button>
+            </div>
+          </div>
+
+          <div class="my-3 row nophoto-row" id="l-FHistory">
+            <h5>Family History</h5>
+            <div class="insidecontent" id="FhistorysContainer">
+              <div class="twoinputs row">
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" name="FhistorysType" autocomplete="on"></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="FhistorysComment"></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-3 row text-center btn-row">
+            <div class="col">
+              <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('FhistorysContainer')">
+                Add Family History
+              </button>
+            </div>
+          </div>
+          <div class="my-3 row photo-row" id="l-Investigations">
+            <h5>Investigations Results</h5>
+    
+        <div class="insidecontentphoto" id="investigationsResultContainer">
+          <%patient[0].patientRecord[patient[0].patientRecord.length - 1].requestRadiology.forEach(investigation => {%>
+          <div class="inputsWithPhotos">
+            <!-- type input-->
+            <div class="col-16 my-1">
+              <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"><%=investigation.title%></textarea>
+            </div>
+            <!-- comment input-->
+            <div class="col-16 my-1">
+              <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"><%=investigation.comment%></textarea>
+            </div>
+            <!-- date input-->
+            <div class="col-16 my-1">
+              <input type="text" id="datePicker" class="form-control text-center" placeholder="Date" />
+            </div>
+            <!-- imgs input-->
+            <div class="col-16 my-1">
+              <input type="file" class="form-control text-center imagesphotos" accept="image/*" multiple />
+            </div>
+            <!-- Delete btn-->
+            <div class="col-16 my-1 text-center ">
+              <i class="ph ph-bold ph-x"></i>
+            </div>
+          </div>
+          <%})%>
+          <%if(patient[0].patientRecord[patient[0].patientRecord.length - 1].requestRadiology.length == 0){%>
+          <div class="inputsWithPhotos">
+            <!-- type input-->
+            <div class="col-16 my-1">
+              <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"></textarea>
+            </div>
+            <!-- comment input-->
+            <div class="col-16 my-1">
+              <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"></textarea>
+            </div>
+            <!-- date input-->
+            <div class="col-16 my-1">
+              <input type="text" id="datePicker" class="form-control text-center" placeholder="Date" />
+            </div>
+            <!-- imgs input-->
+            <div class="col-16 my-1">
+              <input type="file" class="form-control text-center imagesphotos" accept="image/*" multiple />
+            </div>
+            <!-- Delete btn-->
+            <div class="col-16 my-1 text-center ">
+              <i class="ph ph-bold ph-x"></i>
+            </div>
+          </div>
+          <%}%>
+      </div>
+
+      <!-- <h5 class="text-center my-2 display-6">Current Images</h5>
+        <div class="col-16 old-img p-4">
+          <div class="img-space my-2 p-1 gap-1">
+            <img src="img.jpg" />
+            <i class="ph ph-bold ph-x "></i>
+          </div>
+
+          <div class="img-space my-2 p-1 gap-1">
+            <img src="img.jpg" />
+            <i class="ph ph-bold ph-x "></i>
+          </div>
+        </div> -->
+      <div class="my-3 row text-center btn-row">
+        <div class="col">
+          <button type="button" class="btn btn-outline-primary add-btn" onclick="cloneInputsWithPhotos();">
+            Add Investigations Results
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="my-3 row nophoto-row" id="l-medications">
+      <h5>past medications</h5>
+      <div class="insidecontent" id="PmedicationsContainer">
+        <div class="twoinputs row">
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="medicationsType"></textarea>
+          </div>
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="medicationsComment"></textarea>
+          </div>
+          <div class="col-16 my-1 text-center ">
+            <i class="ph ph-bold ph-x"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-3 row text-center btn-row">
+      <div class="col">
+        <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('PmedicationsContainer')">
+          Add past medications
+        </button>
+      </div>
+    </div>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item" id="l-Information">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed main-border  fw-bold " type="button" data-bs-toggle="collapse" data-bs-target="#collapseVital" aria-expanded="false" aria-controls="collapseVital">
+            Vital Information
+          </button>
+        </h2>
+        <div id="collapseVital" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="my-3 row nophoto-row">
+              <!-- <h5>Vital Information</h5> -->
+              <div class="insidecontent" id="vitalInformationContainer">
+                <div class="twoinputs row">
+                  <div class="col-12 my-1">
+                    <!-- dont play with row lw 3ayz t3mlha w 2na t7t seb 2l row w 5od 2ly gowah copy m3ak l7d col-12 2na m5le kol wa7d col-2 f m3ak kman 5 msln-->
+                    <div class="row d-flex justify-content-start">
+                      <!-- copy this start -->
+                      <div class="col-6 col-md-3 d-flex flex-column gap-1 my-1">
+                        <h5 for="weight" class="form-label text-sec mx-1 ">weight</h5>
+                        <div class="d-flex gap-1 p-0">
+                          <input type="number" name="weight" id="weight" placeholder="weight" class="form-control weight" min="1" step=".01">
+                          <select name="weight" class="form-select weighttype">
+                            <option value="KG">KG</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-6 col-md-3 d-flex flex-column gap-1 my-1">
+                        <h5 for="height" class="form-label text-sec mx-1 ">height</h5>
+                        <div class="d-flex gap-1 p-0">
+                          <input type="number" name="height" id="height" placeholder="height" class="form-control height" min="1" step=".01">
+                          <select name="height" class="form-select heighttype">
+                            <option value="cm">cm</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                        <h5 for="bloodPressure" class="form-label text-sec mx-1 ">Blood Pressure</h5>
+                        <div class="d-flex gap-1 p-0">
+                          <input type="text" name="Blood Pressure" id="bloodPressure" placeholder="Blood Pressure" class="form-control bloodPressure">
+                          <select name="Blood Pressure" class="form-select bloodPressuretype">
+                            <option value="mmHg">mmHg</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                        <h5 for="pulseRate" class="form-label text-sec mx-1 ">pulse Rate</h5>
+                        <div class="d-flex gap-1 p-0">
+                          <input type="number" name="pulse Rate" id="pulseRate" placeholder="pulse Rate" class="form-control pulseRate" min="1" step=".01">
+                          <select name="pulse Rate" class="form-select pulseRatetype">
+                            <option value="mmHg">BPM</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                        <h5 for="bloodSugar" class="form-label text-sec mx-1 ">Blood Sugar</h5>
+                        <div class="d-flex gap-1 p-0">
+                          <input type="number" name="bloodSugar" id="bloodSugar" placeholder="Blood Sugar" class="form-control bloodSugar" min="1" step=".01">
+                          <select name="bloodSugar" class="form-select bloodSugartype">
+                            <option value="mg/dL">mg/dL</option>
+                            <option value="mmol/L">mmol/L</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                        <h5 for="datePicker" class="form-label text-sec mx-1 ">Date</h5>
+                        <input type="text" id="datePicker" class="form-control text-center dateofthevital" placeholder="Date" />
+                      </div>
+                      <!-- copy this end  -->
+                    </div>
+                    <!-- row end  -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="my-3 row nophoto-row" id="l-Examination">
+      <h5>Examination</h5>
+      <div class="insidecontent" id="examinationsContainer">
+        <div class="twoinputs row">
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="examinationsType"></textarea>
+          </div>
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="examinationsComment"></textarea>
+          </div>
+          <div class="col-16 my-1 text-center ">
+            <i class="ph ph-bold ph-x"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="my-3 row text-center btn-row">
+      <div class="col">
+        <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('examinationsContainer')">
+          Add Examination
+        </button>
+      </div>
+    </div>
+    <div class="my-3 row nophoto-row plan" id="l-Plan">
+      <h5>Plan</h5>
+      <div class="col-16 my-1">
+        <textarea class="form-control collectplan" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Plan" autocomplete="on" name="plansType"></textarea>
+      </div>
+    </div>
+    <!-- test -->
+    <!-- end test -->
+    <div class="my-3  nophoto-row" id="l-RInvestigations">
+      <div class="d-flex gap-1 justify-content-between align-items-center flex-wrap">
+        <h5>Requested Investigations</h5>
+        <div class="d-flex gap-2">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              investigation Presets
+            </button>
+            <ul class="dropdown-menu dropdown-menu-hover">
+              <%Array.from(presets).forEach(preset => {%>
+          <% if(preset.requestedInvestigations.length > 0){%>
+          <li><a class="dropdown-item investigationpresetitem pointer hover-dark" itemofthat='<%- JSON.stringify(preset.requestedInvestigations) %>'><%= preset.name %></a></li>
+          <%}%>
+             <%})%>
+          </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Add
+        </button>
+        <ul class="dropdown-menu p-2 scroll text-center ">
+          <li><input type="text" class="dropdown-item form-control dropdown-input my-2 nameofinvestigation" placeholder="Name"></li>
+          <li><button class="btn btn-sm btn-outline-success my-2 addInsideRcordinves" type="button">Save</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- item container -->
+  <div class="insidecontent" id="investigationsContainer">
+    <!-- item -->
+    <div class="twoinputs row">
+      <div class="col-16 my-1">
+        <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"></textarea>
+      </div>
+      <div class="col-16 my-1">
+        <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"></textarea>
+      </div>
+      <div class="col-16 my-1 text-center ">
+        <i class="ph ph-bold ph-x"></i>
+      </div>
+    </div>
+    <!-- item end -->
+  </div>
+  <!-- item container -->
+  <div class="my-3 row text-center btn-row">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary add-btn" onclick="addclonemain('investigationsContainer')">
+        Add Investigations
+      </button>
+    </div>
+  </div>
+</div>
+<!-- test -->
+<!-- end test -->
+<div class="my-3 row nophoto-row" id="l-CMedications">
+  <div class="d-flex gap-1 justify-content-between align-items-center flex-wrap">
+    <h5>Current Medications</h5>
+    <div class="d-flex gap-2">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          medication Presets
+        </button>
+        <ul class="dropdown-menu dropdown-menu-hover scroll">
+          <%Array.from(presets).forEach(preset => {%>
+          <% if(preset.currentMedications.length > 0){%>
+          <li><a class="dropdown-item medicationpresetitem" itemofthat='<%- JSON.stringify(preset.currentMedications) %>'><%= preset.name %></a></li>
+          <%}%>
+              <%})%>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-outline-success dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Add
+        </button>
+        <ul class="dropdown-menu p-2 scroll text-center ">
+          <li><input type="text" class="dropdown-item form-control dropdown-input my-2 nameofmedication" placeholder="Name"></li>
+          <li><button class="btn btn-sm btn-outline-success my-2 addInsideRcord" type="button">Save</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class=" insidecontent" id="medicationsContainer">
+    <%if(patient[0].patientRecord[patient[0].patientRecord.length - 1].currentMedications.length > 0){%>
+    <%patient[0].patientRecord[patient[0].patientRecord.length - 1].currentMedications.forEach(medications => {%>
+    <div class="row fourinputs twoinputs">
+      <div class="col-16 my-1">
+        <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="medicationsType"><%=medications.title%></textarea>
+      </div>
+      <div class="col-16 my-1">
+        <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="medicationsComment"><%=medications.description%></textarea>
+      </div>
+      <div class="col-12 col-md-6 my-1">
+        <input type="text" id="datePicker" class="form-control text-center" placeholder="Started At" value="<%=medications.startedAt%>" />
+      </div>
+      <div class="col-12 col-md-6 my-1">
+        <input type="text" id="datePicker" class="form-control text-center" placeholder="Ended At" value="<%=medications.endedAt %>" />
+      </div>
+      <div class="col-16 my-1 text-center ">
+        <i class="ph ph-bold ph-x"></i>
+      </div>
+    </div>
+    <%});%>
+    <%}else{%>
+    <div class="row fourinputs">
+      <div class="col-16 my-1">
+        <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="medicationsType"></textarea>
+      </div>
+      <div class="col-16 my-1">
+        <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="medicationsComment"></textarea>
+      </div>
+      <div class="col-12 col-md-6 my-1">
+        <input type="text" id="datePicker" class="form-control text-center" placeholder="Started At" />
+      </div>
+      <div class="col-12 col-md-6 my-1">
+        <input type="text" id="datePicker" class="form-control text-center" placeholder="Ended At" />
+      </div>
+      <div class="col-16 my-1 text-center ">
+        <i class="ph ph-bold ph-x"></i>
+      </div>
+    </div>
+    <%}%>
+              </div>
+            </div>
+            <div class="my-3 row text-center btn-row">
+              <div class="col">
+                <button type="button" class="btn btn-outline-primary add-btn" onclick="addcloneMedications()">
+                  Add Medications
+                </button>
+              </div>
+            </div>
+            <div class="my-3 row nophoto-row " >
+              <h5>Note</h5>
+              <div class="col-16 my-1">
+                <textarea class="form-control collectnote" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Note" autocomplete="on" name="NoteType"></textarea>
+              </div>
+            </div>
+            <div class="row Submit-btn">
+              <div class="col-16 text-center my-1">
+                <button class="btn btn-success add-btn" type="submit">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include('../small things/smallNav follow.ejs') %>
+  </div>

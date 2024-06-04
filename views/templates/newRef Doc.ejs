@@ -1,0 +1,128 @@
+<!-- navbar end -->
+<!-- main content start -->
+<div class="container my-3 d-flex justify-content-center align-items-center flex-column no-print">
+  <div class="row mb-4 w-100">
+    <form action="" class="form w-100 d-flex justify-content-center align-items-center searchrefdoc">
+      <input type="search" class="home-search fs-4" placeholder="search" />
+      <i class="ph ph-shopping-cart fs-1 mx-2 pointer text-orange" data-bs-toggle="modal" data-bs-target="#cartModal"></i>
+    </form>
+  </div>
+  <div class="row gap-1 align-items-center justify-content-center main-content">
+    <!--card start-->
+
+    <%result.forEach((item) => {%>
+    <div class="card col-sm-12 col-3 m-2 refCard">
+      <div class="card-items">
+        <h4><%=item.name%></h4>
+        <div class="card-list overflow-y-auto w-100">
+          <div class="card-item1 cd-flex flex-column gap-1">
+            <div class="d-flex gap-1 align-items-center">
+              <i class="ph ph-barcode"></i>
+              <span>description:</span>
+            </div>
+            <span><%=item.description%></span>
+          </div>
+          <%item.phoneNumber.forEach((phone) => {%>
+          <div class="card-item1 d-flex align-items-center gap-1">
+            <i class="ph ph-phone"></i>
+            <span><%=phone%></span>
+          </div>
+          <%});%>
+          <div class="card-item1 d-flex align-items-center gap-1">
+            <i class="ph ph-envelope-simple"></i>
+            <span><%=item.email%></span>
+          </div>
+        </div>
+      </div>
+      <div class="row  mt-auto">
+        <div class="col-9 text-center">
+          <button class="btn btn-danger  my-2 card-btnREFDR" type="button" data-serial="<%=item._id%>">Delete</button>
+        </div>
+        <div class="col-3 d-flex align-items-center justify-content-start addtocartprint">
+          <i class="ph ph-plus  my-2 fs-2 pointer cart-add"></i>
+        </div>
+      </div>
+    </div>
+    <%});%>
+    <!-- card end -->
+  </div>
+</div>
+<nav aria-label="..." class="mt-auto no-print">
+  <ul class="pagination">
+    <li class="page-item <%= currentPage == 1 ? 'disabled' : ''%>">
+      <a class="page-link page-nm" href="<%='/ViewRefDR2/?page='+(currentPage-1)%>">Previous</a>
+    </li>
+
+    <% const pagesToShow = 3;const pagesBefore = 2; const startPage = Math.max(currentPage - pagesBefore, 1);const endPage = Math.min(currentPage + pagesToShow, totalPages);for(let i = startPage; i <= endPage; i++) {%>
+    <li class="page-item <%= currentPage == i ? 'active' : ''%>">
+      <a class="page-link bg-doc" href="/ViewRefDR2/?page=<%=i%>"><%=i%></a>
+    </li>
+    <% } %>
+
+    <li class="page-item <%= currentPage == totalPages ? 'disabled' : ''%>">
+      <a class="page-link" href="<%='/ViewRefDR2/?page='+(currentPage+1)%>">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+<!-- card modal -->
+<div class="modal fade no-print" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down modal-dialog-scrollable modal-xl">
+    <div class="modal-content print-ref">
+      <div class="modal-header no-print">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cart</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- item container -->
+        <div id="elementToConvert" class="row p-5 gap-1 align-items-center justify-content-center">
+          <!-- item -->
+          <!-- <div class="col-12 col-md-6">
+            <div class="cartCard">
+              <div class="card-items">
+                <h4>Agent</h4>
+                <div class="card-list overflow-y-auto w-100">
+                  <div class="card-item1 cd-flex flex-column gap-1">
+                    <div class="d-flex gap-1 align-items-center">
+                      <i class="ph ph-barcode"></i>
+                      <span>description:</span>
+                    </div>
+                  </div>
+                  <div class="card-item1 d-flex align-items-center gap-1">
+                    <i class="ph ph-phone"></i>
+                    <span>0100</span>
+                  </div>
+                  <div class="card-item1 d-flex align-items-center gap-1">
+                    <i class="ph ph-calendar"></i>
+                    <span>email:test</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row  mt-auto excludeMe">
+                <div class="col-12 text-center">
+                  <button class="btn btn-danger  my-2 card-btnREFDR" type="button">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- item -->
+
+        </div>
+
+      </div>
+      <div class="modal-footer no-print">
+        <div class="row w-100">
+          <div class="col-12">
+            <button type="button" class="btn btn-outline-primary w-100" id="downloadBtn">Print</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hide-space">
+  <div id="printSpace" class="row gap-1 align-items-center justify-content-center">
+
+  </div>
+</div>

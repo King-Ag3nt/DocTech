@@ -1,0 +1,168 @@
+<div class="fluid-container p-5 d-flex w-100">
+  <div class="items-container">
+    <%patient.patientMRI.forEach((element, index)=> { %>
+    <div class="item text-center fw-bold fs-5">
+      <i class="ph ph-bold ph-folder" data-bs-toggle="modal" data-bs-target="#s<%=element._id%>"></i>
+      <span>
+        <%=element.image.name%>
+      </span>
+      <div class="modal fade" id="s<%=element._id%>" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-2" id="staticBackdropLabel">
+                <%=element.image.name%>
+              </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="photo-container">
+                <%element.image.path.forEach((path)=> {%>
+                <div class="photo-item">
+                  <a href="/img/MRI/<%=path%>" data-lightbox="s<%=element._id%>" data-title="<%=element.image.date?.toISOString().split('T')[0]%>">
+                    <img src="/img/MRI/<%=path%>" />
+                  </a>
+                </div>
+                <%})%>
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <button type="button" class="btn btn-outline-danger DeleteFilesMri" Delete-id="<%=element._id%>">Delete</button>
+              <%if(user.role=='admin' ){%>
+              <button type="button" class="btn btn-outline-secondary" onclick="downloadImages('<%=element._id%>', <%=element.image.path.length%>, '<%=element.image.name%>', '<%=element.image.date?.toISOString().split('T')[0]%>')">Download</button>
+              <%}%>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%})%>
+            </div>
+            <!-- Button for add photo modal -->
+            <a href="/newView/<%= patient._id %>" class="btn btn-secondary position-fixed bottom-0 start-0 m-5 px-4">Back</a>
+            <button type="button" class="btn btn-success position-fixed bottom-0 end-0 m-5 px-4" data-bs-toggle="modal" data-bs-target="#fileModal">
+              Add
+            </button>
+
+            <!--ADD Photo Modal Start-->
+            <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm modal-fullscreen-sm-down modal-dialog-centered  modal-dialog-scrollable">
+                <div class="modal-content modal-mg">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add File's</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form class="modal-body fluid-container" id="upload-form" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-16 my-1">
+                        <label class="form-label fw-bold">Add Photo's:</label>
+                        <input type="file" multiple="multiple" class="form-control" accept="image/*" id="photo" required />
+                      </div>
+                      <div class="col-16 my-1">
+                        <label for="" class="form-label fw-bold">Name:</label>
+                        <input type="text" class="form-control" id="name" patientid="<%=patient._id%>" placeholder="Folder Name" required />
+                      </div>
+                      <div class="col-16 my-1">
+                        <label for="" class="form-label fw-bold">Date:</label>
+                        <input type="text" class="form-control" id="date" placeholder="DD-MM-YYYY" />
+                      </div>
+                    </div>
+                    <div class="row photo-review">
+                      <div class="col-16 my-1">
+                        <label for="" class="form-label fw-bold">Photo's Preview:</label>
+                        <div id="photoPreview" class="items-wraper d-flex align-items-center w-100 gap-1 flex-wrap justify-content-center mt-3"></div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-16">
+                        <button type="submit" class="btn btn-success w-100">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- extra end div start -->
+          </div>
+          <!--extra end div end   -->
+
+          <!--ADD Photo Modal END-->
+          <!-- Folder modal Start-->
+
+          <!-- folder modal end -->
+
+          <!-- folder modal end -->
+
+
+          <!-- Add these script tags to include JSZip and FileSaver.js -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const photoInput = document.getElementById('photo');
+              const photoPreview = document.getElementById('photoPreview');
+
+              photoInput.addEventListener('change', function(e) {
+                const files = e.target.files;
+
+                // Clear previous previews
+                photoPreview.innerHTML = '';
+
+                // Display previews for each selected file
+                for (let i = 0; i < files.length; i++) {
+                  const reader = new FileReader();
+                  reader.onload = function(event) {
+                    const imgItem = document.createElement('div');
+                    imgItem.className = 'img-item';
+
+                    const a = document.createElement('a');
+                    a.href = event.target.result;
+                    a.setAttribute('data-lightbox', 'image-preview');
+                    a.setAttribute('data-title', '');
+
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.width = 100;
+                    img.className = 'rounded-full image-fuild sml-userimg'; // Add .sml-userimg class
+
+                    a.appendChild(img);
+                    imgItem.appendChild(a);
+                    photoPreview.appendChild(imgItem);
+                  };
+                  reader.readAsDataURL(files[i]);
+                }
+
+                // Initialize Lightbox
+                lightbox.option({
+                  resizeDuration: 200,
+                  wrapAround: true,
+                });
+              });
+            });
+
+            function downloadImages(elementId, numImages, folderName, folderDate) {
+              const zip = new JSZip();
+
+              for (let i = 0; i < numImages; i++) {
+                const imagePath = document.querySelector(`#s${elementId} .photo-item:nth-child(${i + 1}) img`).src;
+                const imageName = `image${i + 1}.jpg`;
+
+                fetch(imagePath)
+                  .then(response => response.blob())
+                  .then(blob => {
+                    zip.file(imageName, blob);
+
+                    if (i === numImages - 1) {
+                      zip.generateAsync({
+                          type: 'blob'
+                        })
+                        .then(zipBlob => {
+                          const zipFileName = `${folderName}_${folderDate}.zip`;
+                          saveAs(zipBlob, zipFileName);
+                        });
+                    }
+                  });
+              }
+            }
+          </script>

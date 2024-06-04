@@ -1,0 +1,102 @@
+
+<!-- main content start -->
+<div class="container mt-3 align-items-center d-flex flex-column view-main">
+  <%- include('../componds/patientDetelies.ejs')%>
+  <div class="row sm-nav my-4 w-100 ">
+    <div class="col-6 col-md-3 center">
+      <a href="/newView/<%=patient._id%>" class="p-3 get-btn text-dark ">
+        <h4>
+          Record
+        </h4>
+      </a>
+    </div>
+    <div class="col-6 col-md-3 center">
+      <a href="/viewRelapseV2/<%=patient._id%>" class="p-3 get-btn text-dark link-active">
+        <h4>
+          Relapses
+        </h4>
+      </a>
+    </div>
+    <div class="col-6 col-md-3 center">
+      <a href="/viewScaleV2/<%=patient._id%>" class="p-3 get-btn text-dark">
+        <h4>
+          Scale
+        </h4>
+      </a>
+    </div>
+    <div class="col-6 col-md-3 center">
+      <a href="/files/<%=patient.serial%>" class="p-3 get-btn text-dark">
+        <h4>
+          Files
+        </h4>
+      </a>
+    </div>
+  </div>
+  <!--  -->
+  <div class="accordion accordion-flush w-100 shadow data-container" id="accordionFlushExample">
+    <!-- item start -->
+    <%Array.from(relapses)?.forEach((relapse, index) => {%>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-heading<%=index%>">
+        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=index%>" aria-expanded="false" aria-controls="flush-collapse<%=index%>">
+         <h5>
+          Relapse:<%=relapse.createdAt.toISOString().split('T')[0]%>
+         </h5>
+        </button>
+      </h2>
+      <div id="flush-collapse<%=index%>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=index%>" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <div class="container w-100">
+            <%relapse.relapses.forEach(item => {%>
+            <div class="row tnd ">
+              <div class="col-12">
+                <h3 class="text-info">systemsAffected:</h3>
+                <p><%=item.systemsAffected%></p>
+              </div>
+              <div class="col-12">
+                <h5 class="text-warning">startedAt:</h5>
+                <p><%=item.startedAt?.toISOString().split('T')[0] || 'No date specified'%></p>
+              </div>
+              <div class="col-12">
+                <h5 class="text-warning">endedAt:</h5>
+                <p><%=item.endedAt?.toISOString().split('T')[0] || 'No date specified'%></p>
+              </div>
+              <div class="col-md-6 col-12">
+                <h3 class="text-info">Recovery:</h3>
+                <p><%=item.recovery%></p>
+              </div>
+              <div class="col-md-6 col-12">
+                <h3 class="text-info">Over:</h3>
+                <p><%=item?.over%></p>
+              </div>
+              <div class="col-12">
+                <h3 class="text-info">residue:</h3>
+                <p><%=item.residue%></p>
+              </div>
+              <div class="col-12">
+                <h3 class="text-info">treatments:</h3>
+                <%item.treatments.forEach(treatment => {%>
+                <p>Type:<%=treatment.Type%></p>
+                <p>description:<%=treatment.description%></p>
+                <p>from:<%=treatment.from?.toISOString().split('T')[0]%></p>
+                <p>to:<%=treatment.to?.toISOString().split('T')[0]%></p>
+                <%})%>
+              </div>
+            </div>
+            <hr>
+            <%})%>
+          </div>
+        </div>
+        <div class="row btn-cont my-4 w-100">
+          <div class="col-12 center">
+            <i class="ph ph-bold ph-trash trashBinrelapse" relapseID="<%=relapse._id%>"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%})%>
+    <!-- item end -->
+  </div>
+</div>
+<a href="/relapses/<%=patient.serial%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add Relapses</a>
+

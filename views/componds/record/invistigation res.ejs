@@ -1,0 +1,57 @@
+<div x-show="currentPage === 4" class="form-page" id="page-5">
+  <div class="my-3 row photo-row" id="l-Investigations">
+    <h5>Investigations Results</h5>
+    <div class="insidecontentphoto" id="investigationsResultContainer">
+      <div class="inputsWithPhotos">
+        <!-- type input-->
+        <div class="col-12 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"></textarea>
+        </div>
+        <!-- comment input-->
+        <div class="col-12 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"></textarea>
+        </div>
+        <!-- date input-->
+        <div class="col-12 my-1">
+          <input type="text" id="datePicker" class="form-control text-center" placeholder="Date" />
+        </div>
+        <!-- imgs input-->
+        <div class="col-12 my-1">
+          <input type="file" class="form-control text-center imagesphotos" accept="image/*" multiple />
+        </div>
+        <!-- Delete btn-->
+        <div class="col-12 my-1 text-center ">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+      </div>
+    </div>
+    <!-- <h5 class="text-center my-2 display-6">Current Images</h5>
+    <div class="col-12 old-img p-4">
+      <div class="img-space my-2 p-1 gap-1">
+        <img src="img.jpg" />
+        <i class="ph ph-bold ph-x fs-4"></i>
+      </div>
+
+      <div class="img-space my-2 p-1 gap-1">
+        <img src="img.jpg" />
+        <i class="ph ph-bold ph-x fs-4"></i>
+      </div>
+    </div> -->
+    <div class="my-3 row text-center btn-row">
+      <div class="col">
+        <button type="button" class="btn btn-outline-primary add-btn" onclick="cloneInputsWithPhotos();">
+          Add Investigations Results
+        </button>
+      </div>
+    </div>
+    <div class="row mt-2">
+
+      <div class="col-6 text-center">
+        <button type="button" class="btn btn-secondary" @click="currentPage = 3; activeListItem = 3">Back</button>
+      </div>
+      <div class="col-6 text-center">
+        <button type="button" class="btn btn-primary" @click="currentPage = 5; activeListItem = 5">Next</button>
+      </div>
+    </div>
+  </div>
+</div>

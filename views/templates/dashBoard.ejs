@@ -1,0 +1,251 @@
+<div class="fluid-container">
+  <div class="c-item-container">
+    <div class="c-item up-down shadow">
+      <div class="c-item-top">
+        <div class="d-flex gap-14">
+          <div class="top-left d-flex align-items-center justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="52" viewBox="0 0 48 52" fill="none">
+              <path d="M19.1094 2.12943C22.2034 0.343099 26.0154 0.343099 29.1094 2.12943L42.4921 9.85592C45.5861 11.6423 47.4921 14.9435 47.4921 18.5162V33.9692C47.4921 37.5418 45.5861 40.8431 42.4921 42.6294L29.1094 50.3559C26.0154 52.1423 22.2034 52.1423 19.1094 50.3559L5.72669 42.6294C2.63268 40.8431 0.726688 37.5418 0.726688 33.9692V18.5162C0.726688 14.9435 2.63268 11.6423 5.72669 9.85592L19.1094 2.12943Z" fill="#22C55E"></path>
+            </svg>
+            <i class="ph ph-stethoscope fs-3 svg-ico fade-in"></i>
+          </div>
+          <div class="d-flex flex-column align-items-start">
+            <span class="text-secondary">Total Patients</span>
+            <h4 class="fs-4 fw-bold up-down"><%= total%></h4>
+          </div>
+        </div>
+        <div class="d-flex gap-14">
+          <div class="">
+            <select id="pSelect" class="form-select">
+              <option value="2024" selected>2024</option>
+
+              <!-- Add more years as needed -->
+            </select>
+          </div>
+          <div class="d-flex gap-1 align-items-center">
+            <%if (growth >= 0) {%>
+            <i class="ph ph-trend-up ch-ico ch-up"></i>
+            <%} else {%>
+            <i class="ph ph-trend-down ch-ico ch-down"></i>
+            <%}%>
+            <span class="text-secondary fw-bold fade-in"><%= growth.toFixed(2)%>%</span>
+          </div>
+        </div>
+      </div>
+      <div class="c-item-bottom">
+        <div id="chartSales" class="chart"></div>
+      </div>
+    </div>
+    <div class="c-item up-down shadow">
+      <div class="c-item-top">
+        <div class="d-flex gap-14">
+          <div class="top-left d-flex align-items-center justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="52" viewBox="0 0 48 52" fill="none">
+              <path d="M19.1094 2.12943C22.2034 0.343099 26.0154 0.343099 29.1094 2.12943L42.4921 9.85592C45.5861 11.6423 47.4921 14.9435 47.4921 18.5162V33.9692C47.4921 37.5418 45.5861 40.8431 42.4921 42.6294L29.1094 50.3559C26.0154 52.1423 22.2034 52.1423 19.1094 50.3559L5.72669 42.6294C2.63268 40.8431 0.726688 37.5418 0.726688 33.9692V18.5162C0.726688 14.9435 2.63268 11.6423 5.72669 9.85592L19.1094 2.12943Z" fill="#22C55E"></path>
+            </svg>
+            <i class="ph ph-stethoscope fs-3 svg-ico fade-in"></i>
+          </div>
+          <div class="d-flex flex-column align-items-start">
+            <span class="text-secondary">Total Visits OF THE Current MONTH </span>
+            <h4 class="fs-4 fw-bold up-down"><%= stitics.countOfVisits[stitics.countOfVisits.length - 1]%></h4>
+          </div>
+        </div>
+
+      </div>
+      <div class="c-item-bottom">
+        <div id="chartVisits" class="chart"></div>
+      </div>
+    </div>
+    <div class="c-item up-down shadow">
+      <div class="c-item-top">
+        <div class="d-flex gap-14">
+          <div class="top-left d-flex align-items-center justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="52" viewBox="0 0 48 52" fill="none">
+              <path d="M19.1094 2.12943C22.2034 0.343099 26.0154 0.343099 29.1094 2.12943L42.4921 9.85592C45.5861 11.6423 47.4921 14.9435 47.4921 18.5162V33.9692C47.4921 37.5418 45.5861 40.8431 42.4921 42.6294L29.1094 50.3559C26.0154 52.1423 22.2034 52.1423 19.1094 50.3559L5.72669 42.6294C2.63268 40.8431 0.726688 37.5418 0.726688 33.9692V18.5162C0.726688 14.9435 2.63268 11.6423 5.72669 9.85592L19.1094 2.12943Z" fill="#22C55E"></path>
+            </svg>
+            <i class="ph ph-stethoscope fs-3 svg-ico fade-in"></i>
+          </div>
+          <div class="d-flex flex-column align-items-start">
+            <span class="text-secondary">Total Visits OF THE Current MONTH </span>
+            <h4 class="fs-4 fw-bold up-down"><%= stitics.countOfVisits[stitics.countOfVisits.length - 1]%></h4>
+          </div>
+        </div>
+
+      </div>
+      <div class="c-item-bottom">
+        <div id="chartCol" class="chart"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async function(event) {
+    try {
+      // Fetch patient count data
+      const patientResponse = await fetch("/api/v1/statistics/patientCount");
+      const patientData = await patientResponse.json();
+
+      // Fetch visit tracking data
+      const visitResponse = await fetch("/api/v1/statistics/trackingVisits");
+      const visitData = await visitResponse.json();
+
+      renderChart("#chartSales", patientData.getYear.month, patientData.getYear.newPatients);
+      renderChart("#chartVisits", visitData.getYear.monthForVisits, visitData.getYear.countOfVisits);
+
+      renderTrafficChart(visitData.getYear.holdingDataOfTriffic);
+
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  });
+
+  function renderChart(selector, categories, data) {
+    const chartOptions = {
+      series: [{
+        name: "Number of patients",
+        data: data,
+      }],
+      chart: {
+        type: "area",
+        height: "100%",
+        toolbar: {
+          show: false,
+        },
+      },
+      zoom: {
+        enabled: false,
+      },
+      xaxis: {
+        show: false,
+        labels: {
+          show: false,
+        },
+        categories: categories,
+      },
+      yaxis: {
+        show: false,
+      },
+      grid: {
+        show: false,
+      },
+      fill: {
+        type: "gradient",
+        colors: ["#22C55E", "#3DC37F", "#5CD19F", "#7BE0BF", "#9AEFD9"],
+        gradient: {
+          shade: "light",
+          type: "vertical",
+          shadeIntensity: 0.3,
+          inverseColors: false,
+          opacityFrom: 0.7,
+          opacityTo: 0.3,
+          stops: [0, 100],
+        },
+      },
+      stroke: {
+        width: 2,
+        curve: "smooth",
+        colors: ["#22C55E"],
+      },
+      markers: {
+        size: 0,
+        colors: ["#22C55E"],
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      tooltip: {
+        style: {
+          marker: {
+            fillColors: "#22C55E",
+          },
+        },
+      },
+      dropShadow: {
+        enabled: true,
+        top: 0,
+        left: 0,
+        blur: 3,
+        opacity: 0.5,
+      },
+    };
+
+    const chart = new ApexCharts(document.querySelector(selector), chartOptions);
+    chart.render();
+
+    const style = document.createElement("style");
+    style.innerHTML = ".apexcharts-tooltip-marker { background-color: #22C55E !important; }";
+    document.head.appendChild(style);
+  }
+
+  function renderTrafficChart(holdingDataOfTriffic) {
+
+
+    const seriesData = [];
+    const categories = [];
+
+    // Construct series data and categories
+    holdingDataOfTriffic.forEach(monthData => {
+      monthData.data.forEach(dataPoint => {
+        const existingSeries = seriesData.find(series => series.name === dataPoint.name);
+        if (existingSeries) {
+          existingSeries.data.push(dataPoint.count);
+        } else {
+          seriesData.push({
+            name: dataPoint.name,
+            data: [dataPoint.count]
+          });
+        }
+      });
+      categories.push(monthData.month);
+    });
+
+
+
+    const options = {
+      series: seriesData,
+      chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '40%',
+          endingShape: 'rounded'
+        },
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+      },
+      xaxis: {
+        categories: categories,
+      },
+      yaxis: {
+        title: {
+          text: 'Traffic'
+        }
+      },
+      fill: {
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function(val) {
+            return val; // No need to format as currency
+          }
+        }
+      }
+    };
+
+
+
+    const chart = new ApexCharts(document.querySelector("#chartCol"), options);
+    chart.render();
+  }
+</script>

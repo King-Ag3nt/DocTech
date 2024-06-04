@@ -1,0 +1,79 @@
+<div class="offcanvas offcanvas-end notification-center" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Queue</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body resobsive-Q">
+    <ul class="sortable-list px-0 quelistsmall">
+      <%if(Array.from(queue).length === 0){%>
+      <h3 class="no-pat text-center text-danger">No patients in queue</h3>
+      <%}%>
+          <% Array.from(queue).forEach((item) => { %>
+      <%if(item.status === 'inQueue'){%>
+      <li class="d-flex align-items-center w-100 justify-content-between p-2 my-3 fw-bold border-bottom deletedclass">
+        <div class="details">
+          <div class="inf-data gap-1 d-flex align-items-center">
+            <span>Name:</span>
+            <span><%= item.patient.name %></span>
+          </div>
+          <div class="inf-data gap-1 d-flex align-items-center">
+            <span>Age:</span>
+            <span><%= item.patient.age %></span>
+          </div>
+          <div class="inf-data gap-1 d-flex align-items-center">
+            <span>Serial:</span>
+            <span><%= item.patient.serial %></span>
+          </div>
+          <div class="inf-data gap-1 d-flex align-items-center">
+            <span>حجز:</span>
+            <span><%= item.HAGZ %></span>
+          </div>
+        </div>
+        <div class="ph-cont">
+
+          <a href="#" class="ph-x goToPatientAndDelete" patientId="<%= item.patient.id %>" queueId="<%= item.id %>">GO</a>
+        </div>
+      </li>
+      <%}%>
+          <% }) %>
+    </ul>
+  </div>
+  <div class="offcanavas-footer  p-3">
+
+    <div class="col-12 my-2">
+      <input id="messagethrowinternet" class="form-control text-center" type="text" placeholder="Enter your message">
+    </div>
+    
+    <div class="col-12 my-2">
+      <button class="btn btn-primary w-100 sendmessagethrowinternet">Send</button>
+    </div>
+   
+  </div>
+</div>
+<script>
+  const goToPatientAndDeletee = document.getElementsByClassName('goToPatientAndDelete');
+  if (goToPatientAndDeletee) {
+    Array.from(goToPatientAndDeletee).forEach(item => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
+        const patientId = item.getAttribute('patientId');
+        const queueId = item.getAttribute('queueId');
+        fetch(`/api/v1/queue/delete/${queueId}`, {
+          method: 'DELETE',
+        }).then(() => {
+          window.location.href = `/newView/${patientId}`;
+        });
+      });
+    });
+  }
+
+  function goToPatientAndDelete(patientId, queueId) {
+    fetch(`/api/v1/queue/delete/${queueId}`, {
+      method: 'DELETE',
+    }).then(() => {
+      window.location.href = `/newView/${patientId}`;
+    });
+    return false;
+  }
+</script>

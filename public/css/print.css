@@ -1,0 +1,162 @@
+.d-noneP {
+    display: none;
+}
+
+.print-page {
+    display: none !important;
+
+}
+
+/* font size edit start */
+
+/* h3.text-info {
+    font-size: 24px !important;
+}
+
+h5.text-warning {
+    font-size: 22px !important;
+}
+
+.p-text {
+    font-size: 20px !important;
+}
+
+span.text-sec {
+    font-size: 22px !important;
+}
+
+*/
+/* font size edit end */
+
+@media print {
+    * {
+        margin: 0 !important;
+    }
+
+    .view-main,
+    nav,
+    div,
+    footer,
+    button,
+    a,
+    .main-footer,
+    .main-footer p {
+        display: none !important;
+        border: 0 !important;
+    }
+
+    .print-page,
+    .print-page div,
+    .print-page footer,
+    .print-page header {
+        display: flex !important;
+        opacity: 1;
+        visibility: visible;
+        z-index: 999;
+    }
+
+    thead {
+        display: table-header-group !important;
+    }
+
+    .header {
+        height: auto;
+    }
+
+    .footer,
+    .footer-space {
+        height: 140px;
+        margin-top: auto;
+    }
+
+    .name-space,
+    .name-print {
+        height: 100px;
+    }
+
+    .name-print {
+        top: 20%;
+    }
+
+    .wrd-brk {
+        word-break: break-word;
+    }
+
+    .print-dc {
+        margin: 10px 0;
+        height: fit-content !important;
+    }
+
+    .print-page {
+        height: auto !important;
+        overflow-y: auto;
+        position: static;
+    }
+}
+
+/* print view */
+
+@media screen and (min-width:400px) {
+
+    /* .view-main,
+    nav,
+    div,
+    footer,
+    button,
+    a,
+    .main-footer,
+    .main-footer p {
+      display: none !important;
+      border: 0 !important;
+    } */
+    .print-page,
+    .print-page div,
+    .print-page footer,
+    .print-page header {
+        display: flex !important;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    thead {
+        display: table-header-group !important;
+    }
+
+    .header {
+        height: auto;
+    }
+
+    .footer,
+    .footer-space {
+        height: 140px;
+        margin-top: auto;
+    }
+
+    .name-space,
+    .name-print {
+        height: 100px;
+    }
+
+    .name-print {
+        top: 20%;
+    }
+
+    .wrd-brk {
+        word-break: break-word;
+    }
+
+    .print-dc {
+        margin: 10px 0;
+        height: fit-content !important;
+    }
+
+    .print-page {
+        height: 10vh !important;
+        overflow-y: hidden;
+        position: absolute;
+    }
+}
+
+/* print view */

@@ -1,0 +1,67 @@
+.refCard {
+    height: 350px;
+    word-break: break-word;
+}
+
+.cardPrintAdd {
+    min-height: 350px;
+    height: fit-content;
+    min-width: 300px;
+    width: fit-content;
+}
+
+.hide-space {
+    display: none;
+}
+
+/* @media screen and (min-width:400px) {
+
+    .no-print,
+    .navbar {
+        display: none !important;
+    }
+
+    @page {
+        size: auto;
+        margin: 0;
+        padding: 0;
+        background-color: #fbfbf9;
+        font-size: 15pt;
+    }
+
+    .hide-space {
+        display: flex;
+    }
+
+    #printSpace {
+        z-index: 1000000;
+        opacity: 1;
+    }
+} */
+
+
+
+@media print {
+
+    .no-print,
+    .navbar {
+        display: none !important;
+    }
+
+    @page {
+        size: auto;
+        margin: 0;
+        padding: 0;
+        background-color: #fbfbf9;
+        font-size: 15pt;
+    }
+
+    .hide-space {
+        display: flex;
+    }
+
+    #printSpace {
+        z-index: 1000000;
+        opacity: 1;
+    }
+}

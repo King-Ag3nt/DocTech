@@ -1,0 +1,92 @@
+<div class="fluid-container d-flex flex-column px-3 print-page" style="min-height: 100vh">
+  <!-- rotated -->
+  <!-- end rotated -->
+  <!-- header start -->
+  <header class="row fixed-top w-100 header">
+    <div class="d-flex row d-flex justify-content-between border-bottom">
+      <div class="col-6 d-flex flex-column align-items-center justify-content-center fw-bold print-img">
+        <img src="/img/<%=preScription.logo%>" width="200px" class="img-fuild" style="mix-blend-mode: darken" />
+      </div>
+      <div class="col-6 d-flex flex-column align-items-center justify-content-center fw-bold print-dc">
+        <span class="fw-bold"><%=preScription.header1%></span>
+        <span class="fw-bold"><%=preScription.header2%></span>
+        <span class="fw-bold"><%=preScription.header3%></span>
+        <span class="fw-bold"><%=preScription.header4%></span>
+        <span class="fw-bold"><%=preScription.header5%></span>
+      </div>
+    </div>
+    <div class="col-6 pe-2 fw-bold fs-6">
+      <span class="namePrint "></span>
+    </div>
+    <div class="col-2 text-end fw-bold fs-6">
+      <span class="serialPrint "></span>
+    </div>
+    <div class="col-4 text-end fw-bold fs-6">
+      <span class="datePrint "></span>
+    </div>
+    <div class="col-12 px-2 mb-5 fw-bold fs-6">
+      <span class="diagnosisPrint wrd-brk ">
+      </span>
+    </div>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <td>
+          <div class="header-space">
+          </div>
+          <!-- <div class="name-space border">
+                <span>name-test</span>
+              </div> -->
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="content px-3">
+          <!-- <div
+                class="row fs-4 mt-4 fw-bold border-bottom fixed-top w-100 px-5 name-print"
+              >
+                <div class="col-16 d-flex justify-content-between">
+                  <p class="namePrint">Name:</p>
+                  <p class="datePrint">Date:</p>
+                </div>
+                <p class="diagnosisPrint">Diagnosis:</p>
+              </div> -->
+          <!-- patient information end -->
+          <!-- main content start-->
+          <div class="row mainconteinerbodyofroshta">
+
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          <div class="footer-space"></div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <!-- header end -->
+  <!-- patient information start-->
+
+  <!-- main content end -->
+
+  <!-- footer start -->
+  <footer class="row mt-auto border-top text-end fw-bold fixed-bottom w-100 footer">
+    <div class="d-flex justify-content-center w-100 text-info">
+      <span><%=preScription.content %></span>
+    </div>
+    <div class="col-16 text-end justify-content-end">
+      <span><%=preScription.footer %></span>
+    </div>
+    <div class="col-16 text-end justify-content-end">
+      <span><%=preScription.whatsapp%>:<i class="ph-bold ph-whatsapp-logo"></i></span>
+    </div>
+    <div class="col-16 text-end justify-content-end">
+      <span><%= preScription.phoneNumber %>:<i class="ph-bold ph-phone"></i> </span>
+    </div>
+  </footer>
+</div>

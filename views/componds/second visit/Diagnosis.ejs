@@ -1,0 +1,30 @@
+<div x-show="currentPage === 0" class="form-page" id="page-1">
+
+  <div class="my-3 row main-row">
+    <div class="col-16 my-1">
+      <h5 for="" class="form-label " id="l-Diagnosis"> Diagnosis:</h5>
+      <textarea class="form-control diagnosiss" id="autoHeightTextarea" oninput="autoResize(this)" autocomplete="on" name="Diagnosis"><%=patient[0].patientRecord[patient[0].patientRecord.length - 1].diagnose.title%></textarea>
+    </div>
+    <div class="col col-md-6 my-1">
+      <h5 for="" class="form-label">Date Of Onset:</h5>
+      <input type="text" id="datePicker" class="form-control dateOfOnSet" value="<%=patient[0].patientRecord[patient[0].patientRecord.length - 1].diagnose.dateOfOnSet%>" />
+    </div>
+    <div class="col-12 col-md-6 my-1">
+      <h5 for="" class="form-label">Date Of Diagnosis:</h5>
+      <input type="text" id="datePicker" class="form-control dateOfDignosis" value="<%=patient[0].patientRecord[patient[0].patientRecord.length - 1].diagnose.dateOfDignosis%>" />
+    </div>
+    <div class="col-12 my-3">
+      <div class="row ">
+        <div class="col-6 text-center">
+          <a href="/relapses/<%=patient.serial%>" target="_blank">Relapses</a>
+        </div>
+        <div class="col-6 text-center">
+          <a href="/AddScaleV2/<%=patient._id%>" target="_blank">Scale</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center">
+      <button class="btn btn-primary" type="button" @click="currentPage = 1; activeListItem = 1">Next</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+    <div class="container">
+      <form action="" class="container border my-5 px-5 py-3 rounded shadow  collectFormnewpaitent">
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <h2 class="text-center">Patient Information</h2>
+            <div class="row">
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pName" class="form-label mx-1">Name:<span class="text-danger">*</span></h5>
+                <input type="text" class="form-control" id="pName" placeholder="Name" required oninput="autoResizeinput(this)" />
+              </div>
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pDob" class="form-label mx-1">Date of Birth:<span class="text-danger">*</span></h5>
+                <input type="text" id="datePicker" class="form-control dateOfDignosis" name="date" placeholder="DD-MM-YYYY" required />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pPhone" class="form-label mx-1">Phone:<span class="text-danger">*</span></h5>
+                <input type="text" class="form-control" id="pPhone" placeholder="01xxxxxxxxxx" minlength="11" min="0" required />
+              </div>
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pOccupation" class="form-label mx-1">Occupation:<span class="text-danger">*</span></h5>
+                <input type="text" class="form-control" id="pOccupation" placeholder="Occupation" required />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pAddress" class="form-label mx-1">Address:<span class="text-danger">*</span></h5>
+                <input type="text" class="form-control" id="pAddress" placeholder="Address" required />
+              </div>
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pMaritalStatus" class="form-label mx-1">Marital Status</h5>
+                <select name="marital" id="pMaritalStatus" class="form-select">
+                  <option value="Single">Single</option>
+                  <option value="Engaged">Engaged</option>
+                  <option value="Married">Married</option>
+                  <option value="Divorced">Divorced</option>
+                  <option value="Widowed">Widowed</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pSex" class="form-label mx-1">Sex:<span class="text-danger">*</span></h5>
+                <select name="sex" id="pSex" class="form-select" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pID" class="form-label mx-1">National ID:</h5>
+                <input type="number" class="form-control" id="pID" minlength="14" min="0" placeholder="xxxxxxxxxxxx" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pCountry" class="form-label mx-1">Country:<span class="text-danger">*</span></h5>
+                <input type="text" class="form-control" id="pCountry" placeholder="Country" required />
+                <i id="pCountryTrigger" class="fas fa-angle-down"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 my-2 <% if(user.role !== 'admin') { %>d-none<% } %>">
+            <h2 class="text-center">Risk Factors</h2>
+            <div class="row">
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pSmoking" class="form-label mx-1">Smoking:<span class="text-danger">*</span></h5>
+                <select name="smoking" id="pSmoking" class="form-select" required>
+                  <option value="Never Smoked">Never Smoked</option>
+                  <option value="Ex-Smoker">Ex-Smoker</option>
+                  <option value="Current smoker">Current Smoker</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pAlcohol" class="form-label mx-1">Alcohol:<span class="text-danger">*</span></h5>
+                <select name="alcohol" id="pAlcohol" class="form-select" required>
+                  <option value="NeverDrink">Never Drink</option>
+                  <option value="LifeTimeAbstainer">Life Time Abstainer</option>
+                  <option value="CurrnetInfrequentDrinker">Current Infrequent Drinker</option>
+                  <option value="CurrnetLightDrinker">Current Light Drinker</option>
+                  <option value="CurrnetModerateDrinker">Current Moderate Drinker</option>
+                  <option value="CurrnetHeavyDrinker">Current Heavy Drinker</option>
+                </select>
+                <!-- <input type="text" class="form-control" list="datalistOptions" id="pAlcohol">
+                <datalist id="datalistOptions">
+                  <option value="Never Drink">
+                  <option value="Life Time Abstainer">
+                  <option value="Current Infrequent Drinker">
+                  <option value="Current Light Drinker">
+                  <option value="Current Moderate Drinker">
+                  <option value="Current Heavy Drinker">
+                </datalist> -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-center my-2">
+                <h5 for="pDrugAbuse" class="form-label">Drug abuse:</h5>
+                <select name="pDrugAbuse" id="pDrugAbuse" class="form-select">
+                  <option value="Never">Never</option>
+                  <option value="Ex">Ex Drug Abuser</option>
+                  <option value="Mild">Mild</option>
+                  <option value="Moderate">Moderate</option>
+                  <option value="Severr">Severe</option>
+
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pDrugType" class="form-label mx-1">Drug Type:</h5>
+                <input type="text" class="form-control" id="pDrugType" placeholder="Drug Type:" />
+              </div>
+              <div class="col-12 col-md-6 my-2">
+                <h5 for="pDrugSince" class="form-label mx-1">Since When:</h5>
+                <input type="text" class="form-control pDrugSince" id="datePicker" placeholder="DD-MM-YYYY" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center my-5">
+              <button type="submit" class="btn btn-primary px-4">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>

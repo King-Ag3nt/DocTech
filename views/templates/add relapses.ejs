@@ -1,0 +1,135 @@
+<div class="fluid-container m-0 d-flex  m-con w-100">
+  <div class="row my-5 mx-3 ml-3 py-5 px-2  rounded sticky">
+    <%- include('../small things/sideRelapse.ejs') %>
+  </div>
+  <div class="col">
+    <div class="relapses-container container">
+      <h2 class="text-info mb-5 text-center display-6 fw-bold">Relapses Form</h2>
+      <form id="relapsesForm">
+        <div class="relapse-section">
+          <h5 for="systemsAffected">Systems Affected:</h5>
+          <input class="systemsAffected form-control patientId" type="text" required="" patientid="<%=patient._id%>" requiredserial="<%=patient.serial%>">
+          <h5 for="startedAt">Started At:</h5>
+          <input class="startedAt form-control" type="date" id="datePicker" placeholder="dd-mm-yyyy" required="">
+          <h5 for="endedAt">Ended At:</h5>
+          <input class="endedAt form-control" type="date" id="datePicker" placeholder="dd-mm-yyyy" required="">
+          <div class="base-treatments">
+            <div class="treatments"><h5 for="treatmentType">Treatment Type:</h5>
+              <input class="treatmentType form-control treatmentType" type="text" required="">
+              <h5 for="treatmentDescription">Treatment Description:</h5>
+              <input class="treatmentDescription form-control treatmentDescription" type="text" required="">
+              <h5 for="treatmentFrom">Treatment From:</h5>
+              <input class="treatmentFrom form-control treatmentFrom form-control flatpickr-input" id="datePicker" type="date" placeholder="dd-mm-yyyy" required="">
+              <h5 for="treatmentTo">Treatment To:</h5>
+              <input class=" treatmentTo form-control treatmentTo form-control flatpickr-input" id="datePicker" type="date" placeholder="dd-mm-yyyy" required="">
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-16 text-center">
+              <button class="btn btn-outline-info mt-2" type="button" onclick="addBaseTreatment(this)">Add Treatment</button>
+            </div>
+          </div>
+          <h5 for="recovery" class="form-label mt-1">Recovery:</h5>
+          <select class="recovery form-control" required="">
+            <option value="Full Recovery">Full Recovery</option>
+            <option value="Partial Recovery">Partial Recovery</option>
+            <option value="No Recovery">No Recovery</option>
+          </select>
+          <h5 for="over" class="form-label mt-1">Over:</h5>
+          <div class="d-flex gap-2">
+            <input type="text" class="form-control overValue">
+            <select class="form-control overUnit" required="" style="width: 50%;">
+              <option value="Day">Day</option>
+              <option value="Month">Monthy</option>
+              <option value="Year">Year</option>
+            </select>
+          </div>
+          <h5 for="residue" class="form-label mt-1">Residue:</h5>
+          <select class="residue form-control" required="">
+            <option value="none" selected>None</option>
+            <option value="mild">Mild</option>
+            <option value="moderate">Moderate</option>
+            <option value="severe">Severe</option>
+          </select>
+        </div>
+        <div class="row my-2">
+          <div class="col-12 text-center">
+            <button class="btn btn-outline-danger" type="button" onclick="addRelapseSection()">Add Relapse</button>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button class="submitrelapsebtn btn btn-outline-success px-4" type="button">Submit Form</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initializeFlatpickr(elements, dateFormat) {
+    elements.forEach((input) => {
+      flatpickr(input, {
+        dateFormat
+      });
+    });
+  }
+
+  function addTreatment(container) {
+    if (container) {
+      const newTreatment = document.createElement('div');
+      newTreatment.classList.add('treatments');
+      newTreatment.innerHTML = `
+          <h5 for="treatmentType">Treatment Type:</h5>
+          <input type="text" class="treatmentType form-control" required="">
+          <h5 for="treatmentDescription">Treatment Description:</h5>
+          <input type="text" class="treatmentDescription form-control" required="">
+          <h5 for="treatmentFrom">Treatment From:</h5>
+          <input type="date" class="treatmentFrom form-control flatpickr-input" placeholder="dd-mm-yyyy" required="">
+          <h5 for="treatmentTo">Treatment To:</h5>
+          <input type="date" class="treatmentTo form-control flatpickr-input" placeholder="dd-mm-yyyy" required="">
+        `;
+      container.appendChild(newTreatment);
+      initializeFlatpickr(newTreatment.querySelectorAll('.flatpickr-input'), "Y-m-d");
+    } else {
+      console.error('Container not found');
+    }
+  }
+
+  function addBaseTreatment(button) {
+    const baseTreatmentInputs = button.closest('.relapse-section').querySelector('.base-treatments');
+    addTreatment(baseTreatmentInputs);
+  }
+
+  function addRelapseSection() {
+    const relapseSections = document.querySelectorAll('.relapse-section');
+    const lastRelapseSection = relapseSections[relapseSections.length - 1];
+    const newRelapseSection = lastRelapseSection.cloneNode(true);
+    newRelapseSection.removeAttribute('id');
+
+    newRelapseSection.querySelectorAll('input, select').forEach((input) => {
+      if (input.tagName === 'SELECT' && input.classList.contains('residue')) {
+        input.value = 'none'; // Set default value for residue select
+      } else if (input.tagName === 'SELECT' && input.classList.contains('recovery')) {
+        input.value = 'Full Recovery'; // Set default value for recovery select
+      } else {
+        input.value = ''; // Clear other inputs
+      }
+    });
+
+    // Remove all treatments except the first one
+    const treatments = newRelapseSection.querySelectorAll('.treatments');
+    for (let i = 1; i < treatments.length; i++) {
+      treatments[i].remove();
+    }
+
+    const container = relapseSections[0].parentNode;
+    container.insertBefore(newRelapseSection, lastRelapseSection.nextSibling);
+    initializeFlatpickr(newRelapseSection.querySelectorAll('.flatpickr-input'), "Y-m-d");
+  }
+
+
+  initializeFlatpickr(document.querySelectorAll(".startedAt, .endedAt"), "Y-m-d");
+  initializeFlatpickr(document.querySelectorAll(".treatmentFrom, .treatmentTo"), "Y-m-d");
+</script>

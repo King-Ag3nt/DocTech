@@ -1,0 +1,33 @@
+<div class="row my-5 mx-3 sticky left-10">
+    <div class="col sticky">
+      <div class="list-group">
+        <h4 class="text-center mt-5">Navigation</h4>
+        <span class="list-group-item list-group-item-action pointer"  @click="currentPage = 0; activeListItem = 0"
+        :class="{ 'active': activeListItem === 0 }">Diagnosis</span>
+        <span class="list-group-item list-group-item-action pointer" @click="currentPage = 1; activeListItem = 1"
+        :class="{ 'active': activeListItem === 1 }">DMD</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 2; activeListItem = 2"
+        :class="{ 'active': activeListItem === 2 }">Complaints</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 3; activeListItem = 3"
+        :class="{ 'active': activeListItem === 3 }">Past Medical History</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 4; activeListItem = 4"
+        :class="{ 'active': activeListItem === 4 }">Family History</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 5; activeListItem = 5"
+        :class="{ 'active': activeListItem === 5 }">Investigations Results</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 6; activeListItem = 6"
+        :class="{ 'active': activeListItem === 6 }">Past Medications</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 7; activeListItem = 7"
+        :class="{ 'active': activeListItem === 7 }">Vital Information</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 8; activeListItem = 8"
+        :class="{ 'active': activeListItem === 8 }">Examination</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 8; activeListItem = 8"
+        :class="{ 'active': activeListItem === 8 }">Plan</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 9; activeListItem = 9"
+        :class="{ 'active': activeListItem === 9 }">Requested Investigations</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 10; activeListItem = 10"
+        :class="{ 'active': activeListItem === 10 }">Current Medications</span>
+        <span class="list-group-item list-group-item-action pointer"@click="currentPage = 10; activeListItem = 10"
+        :class="{ 'active': activeListItem === 10 }">Note</span>
+      </div>
+    </div>
+  </div>

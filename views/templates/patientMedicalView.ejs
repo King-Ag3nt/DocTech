@@ -1,0 +1,84 @@
+<div class="container mt-3 align-items-center d-flex flex-column view-main">
+  <%- include('../componds/patientDetelies.ejs')%>
+  <div class="row view-nav my-4 w-100 ">
+    <ul class="nav nav-tabs py-3 border-0" id="myTab" role="tablist">
+      <li class="nav-item col-6 col-md-3 text-center mb-1" role="presentation">
+        <button class="view-link active" id="record-tab" data-bs-toggle="tab" data-bs-target="#record-tab-pane" type="button" role="tab" aria-controls="record-tab-pane" aria-selected="true">
+          <h4>Record</h4>
+        </button>
+      </li>
+      <li class="nav-item col-6 col-md-3 text-center mb-1" role="presentation">
+        <button class="view-link" id="relapses-tab" data-bs-toggle="tab" data-bs-target="#relapses-tab-pane" type="button" role="tab" aria-controls="relapses-tab-pane" aria-selected="false">
+          <h4>Relapses</h4>
+        </button>
+      </li>
+      <li class="nav-item col-6 col-md-3 text-center mb-1" role="presentation">
+        <button class="view-link" id="scale-tab" data-bs-toggle="tab" data-bs-target="#scale-tab-pane" type="button" role="tab" aria-controls="scale-tab-pane" aria-selected="false">
+          <h4>Scale</h4>
+        </button>
+      </li>
+      <li class="nav-item col-6 col-md-3 text-center mb-1" role="presentation">
+        <a class="view-link" href="/files/<%=patient.serial%>">
+          <h4>Files</h4>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!--  -->
+  <div class="row w-100">
+    <div class="tab-content" id="myTabContent">
+
+
+      <div class="tab-pane  show active" id="record-tab-pane" role="tabpanel" aria-labelledby="record-tab" tabindex="0">
+
+        <div class="col-12 mb-5">
+          <%- include('../componds/new view/record.ejs')%>
+
+        </div>
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <%if(patient.patientRecord.length > 0){%>
+          <%if(user.typeOfRecord){%>
+          <a href="/HorizontalFollowUp/<%=patient._id%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add record</a>
+          <%}else{%>
+          <a href="/secondVisints/<%=patient._id%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add record</a>
+          <%}%>
+                <%}else{%>
+          <%if(user.typeOfRecord){%>
+          <a href="/HorizontalRecord/<%=patient._id%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add record</a>
+          <%}else{%>
+          <a href="/addRecordV2/<%=patient._id%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add record</a>
+          <%}%>
+                <%}%>
+        </div>
+
+
+      </div>
+
+      <div class="tab-pane " id="relapses-tab-pane" role="tabpanel" aria-labelledby="relapses-tab" tabindex="0">
+
+        <div class="col-12 mb-5">
+          <!-- relapse place -->
+          <%- include('../componds/new view/relapse.ejs')%>
+        </div>
+        <div class="col-12 text-center">
+          <a href="/relapses/<%=patient.serial%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add Relapses</a>
+        </div>
+      </div>
+
+      <div class="tab-pane " id="scale-tab-pane" role="tabpanel" aria-labelledby="scale-tab" tabindex="0">
+        <div class="col-12 mb-5">
+          <%- include('../componds/new view/scale.ejs')%>
+        </div>
+        <div class="col-12 text-center">
+          <a href="/AddScaleV2/<%=patient._id%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add Scale</a>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+<%- include('../print page.ejs')%>

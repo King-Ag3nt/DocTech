@@ -1,0 +1,702 @@
+<!-- navbar end -->
+<!-- main content start -->
+<div class="container m-0 d-flex justify-content-end m-con">
+  <div class="row">
+    <div class="col">
+      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+        <form class="container my-5  border p-3 rounded collectFormEdit bg-light">
+          <h1 class="text-center text-danger">Patient Record Form Edit</h1>
+          <div class="my-3 row main-row">
+            <div class="col-16 my-1">
+              <h5 for="" class="fw-bold " id="l-Diagnosis"> Diagnosis:</h5>
+              <textarea class="form-control diagnosiss" id="autoHeightTextarea" oninput="autoResize(this)" autocomplete="on" name="Diagnosis"><%=record.diagnose.title%></textarea>
+            </div>
+            <div class="col col-md-6 my-1">
+              <h5 for="" class="fw-bold">Date Of Onset:</h5>
+              <input type="text" id="datePicker" class="form-control dateOfOnSet" value="<%=record.diagnose.dateOfOnSet%>" />
+            </div>
+            <div class="col-12 col-md-6 my-1">
+              <h5 for="" class="fw-bold">Date Of Diagnosis:</h5>
+              <input type="text" id="datePicker" class="form-control dateOfDignosis" value="<%=record.diagnose.dateOfDignosis%>" />
+            </div>
+            <div class="col-12 my-3">
+              <div class="row ">
+                <div class="col-6 text-center">
+                  <a href="/relapses/<%=record.patient.serial%>" target="_blank">Relapses</a>
+                </div>
+                <div class="col-6 text-center">
+                  <a href="/AddScaleV2/<%=record.patient._id%>" target="_blank">Scale</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-3 row nophoto-row" id="l-Complaints">
+            <h5>Complaints</h5>
+            <!-- items container -->
+            <div class="insidecontent" id="complaintsContainer">
+              <%Array.from(record.complaints).forEach(function(item) {%>
+              <div class="twoinputs row">
+                <!-- content -->
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="complaintsType"><%=item.title%></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="complaintsComment"><%=item.comment%></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+                <!-- content -->
+              </div>
+              <%});%>
+            </div>
+          </div>
+          <div class="my-3 row text-center btn-row">
+            <div class="col">
+              <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('complaintsContainer')">
+                Add Complaint
+              </button>
+            </div>
+          </div>
+          <!-- item -->
+          <div class="my-3 row nophoto-row" id="l-MHistories">
+            <h5>Past Medical Histories</h5>
+            <div class="insidecontent" id="MhistorysContainer">
+              <%Array.from(record.pastMedicalHistories).forEach(function(item) {%>
+              <div class="twoinputs row">
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="MhistorysType"><%=item.title%></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="MhistorysComment"><%=item.comment%></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+              <%});%>
+            </div>
+          </div>
+          <!-- item -->
+
+          <div class="my-3 row text-center btn-row">
+            <div class="col">
+              <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('MhistorysContainer')">
+                Add Medical Histories
+              </button>
+            </div>
+          </div>
+
+          <div class="my-3 row nophoto-row" id="l-FHistory">
+            <h5>Family History</h5>
+            <div class="insidecontent" id="FhistorysContainer">
+              <%if(record.familyHistory){%>
+              <%Array.from(record.familyHistory).forEach(function(item) {%>
+              <div class="twoinputs row">
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" name="FhistorysType" autocomplete="on"><%=item.title%></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="FhistorysComment"><%=item.comment%></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+              <%});%>
+              <%}else{%>
+              <div class="twoinputs row">
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" name="FhistorysType" autocomplete="on"></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="FhistorysComment"></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+
+              <%}%>
+              </div>
+            </div>
+            <div class="my-3 row text-center btn-row">
+              <div class="col">
+                <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('FhistorysContainer')">
+                  Add Family History
+                </button>
+              </div>
+            </div>
+            <div class="my-3 row photo-row" id="l-Investigations">
+              <h5>Investigations Results</h5>
+              <div class="insidecontentphoto" id="investigationsResultContainer">
+     <%if(record.pastRadiology.length > 0){%>
+              <%Array.from(record.pastRadiology).forEach(function(item) {%>
+              <div class="inputsWithPhotos">
+                <!-- type input-->
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"><%=item.title%></textarea>
+                </div>
+                <!-- comment input-->
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"><%=item.comment%></textarea>
+                </div>
+                <!-- date input-->
+                <div class="col-16 my-1">
+                  <input type="text" id="datePicker" class="form-control text-center" placeholder="Date" value="<%=item.date%>" />
+                </div>
+                <!-- imgs input-->
+                <div class="col-16 my-1">
+                  <input type="file" class="form-control text-center imagesphotos" accept="image/*" multiple />
+                </div>
+                <div class="oldImgs d-none hidden"><%=item.img%></div>
+                <!-- Delete btn-->
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+              <%});%>
+              <%}else{%>
+              <div class="inputsWithPhotos">
+                <!-- type input-->
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"></textarea>
+                </div>
+                <!-- comment input-->
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"></textarea>
+                </div>
+                <!-- date input-->
+                <div class="col-16 my-1">
+                  <input type="text" id="datePicker" class="form-control text-center" placeholder="Date" />
+                </div>
+                <!-- imgs input-->
+                <div class="col-16 my-1">
+                  <input type="file" class="form-control text-center imagesphotos" accept="image/*" multiple />
+                </div>
+                <div class="oldImgs d-none hidden"></div>
+                <!-- Delete btn-->
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+              <%}%>
+            </div>
+            <!-- <h5 class="text-center my-2 display-6">Current Images</h5>
+        <div class="col-16 old-img p-4 >
+          <div class="img-space my-2 p-1 gap-1">
+            <img src="img.jpg" />
+            <i class="ph ph-bold ph-x "></i>
+          </div>
+
+          <div class="img-space my-2 p-1 gap-1">
+            <img src="img.jpg" />
+            <i class="ph ph-bold ph-x "></i>
+          </div>
+        </div> -->
+            <div class="my-3 row text-center btn-row">
+              <div class="col">
+                <button type="button" class="btn btn-outline-primary add-btn" onclick="cloneInputsWithPhotos();">
+                  Add Investigations Results
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="my-3 row nophoto-row" id="l-medications">
+            <h5>past medications</h5>
+            <div class="insidecontent" id="PmedicationsContainer">
+              <%Array.from(record.presentMedicalHistories).forEach((item) => {%>
+              <div class="twoinputs row">
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="medicationsType"><%=item.title%></textarea>
+                </div>
+                <div class="col-16 my-1">
+                  <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="medicationsComment"><%=item.comment%></textarea>
+                </div>
+                <div class="col-16 my-1 text-center ">
+                  <i class="ph ph-bold ph-x"></i>
+                </div>
+              </div>
+              <%})%>
+            </div>
+          </div>
+          <div class="my-3 row text-center btn-row">
+            <div class="col">
+              <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('PmedicationsContainer')">
+                Add past medications
+              </button>
+            </div>
+          </div>
+          <!-- dmd -->
+          <!-- <%if(record.DMD){%>
+          <div class="my-3 row nophoto-row" id="l-DMD">
+            <h5>DMD</h5>
+            <div class=" insidecontent border-bottom" id="DMDContainer">
+              <%Array.from(record.DMD).forEach(function(item) {%>
+                <div class="row DMDinputs">
+                  <div class="col-12 col-md-3 my-1">
+                    <input type="text" class="form-control text-center titleInput" list="titleInputList" id="titleInput" placeholder="Type" value="<%=item?.Type%>">
+                    <datalist id="titleInputList">
+                      <option value="Aubagio">
+                      <option value="Avonex">
+                      <option value="Betaferon">
+           
+                      <option value="Copaxone">
+                      <option value="Extavia">
+                      <option value="Gilenya">
+                      <option value="Kesimpta">
+                      <option value="Lemtrada">
+                      <option value="Mavenclad">
+                      <option value="Mayzent">
+                      <option value="Ocrevus">
+                      <option value="Plegridy">
+                      <option value="Ponvory">
+                      <option value="Rebif">
+                      <option value="Tecfidera">
+                      <option value="Tysabri">
+                      <option value="Zeposia">
+                    </datalist>
+                  </div>
+                  <div class="col-12 col-md-3 my-1">
+                    <input type="text" id="datePicker" class="form-control text-center DMDSAT" placeholder="Started At" value="<%=item?.startedAt%>" />
+                  </div>
+                  <div class="col-12 col-md-3 my-1 text-center">
+                    <input type="checkbox" class="form-check-input" value="On Going" name="DMD" id="onGoingCheckbox" <% if (item?.onGoing) { %> checked <% } %>>
+                    <label class="form-check-label ">On Going</label>
+                  </div>
+                  <div class="col-12 col-md-3 my-1">
+                    <input type="text" id="datePicker" class="form-control text-center DMDEAT" placeholder="Ended At" value="<%=item?.endedAt%>" />
+                  </div>
+                  <div class="col-12 my-1">
+                    <textarea class="form-control Description" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Description" autocomplete="on" name="DMDComment"><%=item?.description%></textarea>
+                  </div>
+                  <div class="col-12 my-1">
+                    <textarea class="form-control causeOfDC" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Cause of DC" autocomplete="on" name="DMDCause"><%=item?.causeOfDC%></textarea>
+                  </div>
+                  <h6 class="my-2  text-sec">Adherence</h6>
+                  <div class="col-12 col-md-6 my-1">
+                    <select name="Adherence" id="adhDuration" class="form-select adherenceStatus">
+                      <option value="Choose" <% if (item?.adherence?.status === 'Choose') { %> selected <% } %>>Choose</option>
+                      <option value="Full" <% if (item?.adherence?.status === 'Full') { %> selected <% } %>>Full</option>
+                      <option value="Missing doses" <% if (item?.adherence?.status === 'Missing doses') { %> selected <% } %>>Missing doses</option>
+                      <option value="Occasional" <% if (item?.adherence?.status === 'Occasional') { %> selected <% } %>>Occasional</option>
+                      <option value="Frequent" <% if (item?.adherence?.status === 'Frequent') { %> selected <% } %>>Frequent</option>
+                      <option value="DC" <% if (item?.adherence?.status === 'DC') { %> selected <% } %>>DC</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6 my-1 d-flex gap-1">
+                    <input type="text" class="form-control text-center valueofDuration" placeholder="Duration" value="<%= (item?.adherence?.dc && item?.adherence?.dc.split(' ')[0]) || '' %>" />
+                    <select name="Adherence" id="adhDuration" class="form-select typeoftheDuration" style="width: 30%;">
+                      <option value="Choose" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Choose') { %> selected <% } %>>Choose</option>
+                      <option value="Day" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Day') { %> selected <% } %>>Day</option>
+                      <option value="Month" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Month') { %> selected <% } %>>Month</option>
+                      <option value="Year" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Year') { %> selected <% } %>>Year</option>
+                    </select>
+                  </div>
+                  <div class="col-12 my-1">
+                    <textarea class="form-control whytheadherence" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Why" autocomplete="on" name="DMDAD"><%=item?.why%></textarea>
+                  </div>
+                  <h6 class="my-2  text-sec">Adverse Events</h6>
+                  <div class="col-12 my-1">
+                    <textarea class="form-control Clinic" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Clinic" autocomplete="on" name="Clinic"><%=item?.adverseEvents?.clinic%></textarea>
+                  </div>
+                  <div class="col-12 my-1">
+                    <textarea class="form-control Labs" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Labs" autocomplete="on" name="Labs"><%=item?.adverseEvents?.labs%></textarea>
+                  </div>
+                  <div class="col-12 my-1 text-center ">
+                    <i class="ph ph-bold ph-x"></i>
+                  </div>
+                </div>
+                <%})%>
+              </div>
+            </div>
+            <div class="my-3 row text-center btn-row">
+              <div class="col">
+                <button class="btn btn-outline-primary add-btn" type="button" onclick="addcloneDMD('DMDContainer')">
+                  Add DMD
+                </button>
+              </div>
+            </div>
+            <%}%> -->
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed main-border  fw-bold " type="button" data-bs-toggle="collapse" data-bs-target="#collapseDMD" aria-expanded="false" aria-controls="collapseDMD">
+                  DMD
+                </button>
+              </h2>
+              <div id="collapseDMD" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <%if(record.DMD){%>
+                  <div class="my-3 row nophoto-row" id="l-DMD">
+                    <h5>DMD</h5>
+                    <div class="insidecontent border-bottom" id="DMDContainer">
+                      <%Array.from(record.DMD).forEach(function(item) {%>
+                      <div class="row DMDinputs">
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" class="form-control text-center titleInput" list="titleInputList" id="titleInput" placeholder="Type" value="<%=item?.Type%>">
+                          <datalist id="titleInputList">
+                            <option value="Aubagio">
+                            <option value="Avonex">
+                            <option value="Betaferon">
+
+                            <option value="Copaxone">
+                            <option value="Extavia">
+                            <option value="Gilenya">
+                            <option value="Kesimpta">
+                            <option value="Lemtrada">
+                            <option value="Mavenclad">
+                            <option value="Mayzent">
+                            <option value="Ocrevus">
+                            <option value="Plegridy">
+                            <option value="Ponvory">
+                            <option value="Rebif">
+                            <option value="Tecfidera">
+                            <option value="Tysabri">
+                            <option value="Zeposia">
+                          </datalist>
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" id="datePicker" class="form-control text-center DMDSAT" placeholder="Started At" value="<%=item?.startedAt%>" />
+                        </div>
+                        <div class="col-12 col-md-3 my-1 text-center">
+                          <input type="checkbox" class="form-check-input" value="On Going" name="DMD" id="onGoingCheckbox" <% if (item?.onGoing) { %> checked <% } %>>
+                          <h5 class="form-check-label ">On Going</h5>
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                          <input type="text" id="datePicker" class="form-control text-center DMDEAT" placeholder="Ended At" value="<%=item?.endedAt%>" />
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Description" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Description" autocomplete="on" name="DMDComment"><%=item?.description%></textarea>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control causeOfDC" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Cause of DC" autocomplete="on" name="DMDCause"><%=item?.causeOfDC%></textarea>
+                        </div>
+                        <h5 class="my-2  text-sec">Adherence</h5>
+                        <div class="col-12 col-md-6 my-1">
+                          <select name="Adherence" id="adhDuration" class="form-select adherenceStatus">
+                            <option value="Choose" <% if (item?.adherence?.status === 'Choose') { %> selected <% } %>>Choose</option>
+                            <option value="Full" <% if (item?.adherence?.status === 'Full') { %> selected <% } %>>Full</option>
+                            <option value="Missing doses" <% if (item?.adherence?.status === 'Missing doses') { %> selected <% } %>>Missing doses</option>
+                            <option value="Occasional" <% if (item?.adherence?.status === 'Occasional') { %> selected <% } %>>Occasional</option>
+                            <option value="Frequent" <% if (item?.adherence?.status === 'Frequent') { %> selected <% } %>>Frequent</option>
+                            <option value="DC" <% if (item?.adherence?.status === 'DC') { %> selected <% } %>>DC</option>
+                          </select>
+                        </div>
+                        <div class="col-12 col-md-6 my-1 d-flex gap-1">
+                          <input type="text" class="form-control text-center valueofDuration" placeholder="Duration" value="<%= (item?.adherence?.dc && item?.adherence?.dc.split(' ')[0]) || '' %>" />
+                          <select name="Adherence" id="adhDuration" class="form-select typeoftheDuration" style="width: 30%;">
+                            <option value="Choose" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Choose') { %> selected <% } %>>Choose</option>
+                            <option value="Day" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Day') { %> selected <% } %>>Day</option>
+                            <option value="Month" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Month') { %> selected <% } %>>Month</option>
+                            <option value="Year" <% if (item?.adherence?.dc && item?.adherence?.dc.split(' ')[1] === 'Year') { %> selected <% } %>>Year</option>
+                          </select>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control whytheadherence" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Why" autocomplete="on" name="DMDAD"><%=item?.why%></textarea>
+                        </div>
+                        <h5 class="my-2  text-sec">Adverse Events</h5>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Clinic" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Clinic" autocomplete="on" name="Clinic"><%=item?.adverseEvents?.clinic%></textarea>
+                        </div>
+                        <div class="col-12 my-1">
+                          <textarea class="form-control Labs" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Labs" autocomplete="on" name="Labs"><%=item?.adverseEvents?.labs%></textarea>
+                        </div>
+                        <div class="col-12 my-1 text-center ">
+                          <i class="ph ph-bold ph-x"></i>
+                        </div>
+                      </div>
+                      <%})%>
+                    </div>
+                  </div>
+                  <div class="my-3 row text-center btn-row">
+                    <div class="col">
+                      <button class="btn btn-outline-primary add-btn" type="button" onclick="addcloneDMD('DMDContainer')">
+                        Add DMD
+                      </button>
+                    </div>
+                  </div>
+                  <%}%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- dmd -->
+
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" id="l-Information">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed main-border  fw-bold " type="button" data-bs-toggle="collapse" data-bs-target="#collapseVital" aria-expanded="false" aria-controls="collapseVital">
+                    Vital Information
+                  </button>
+                </h2>
+                <div id="collapseVital" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+    <div class="my-3 row nophoto-row" >
+      <div class="insidecontent" id="vitalInformationContainer">
+        <%Array.from(record.vitalInformation).forEach((item) => {%>
+                  <div class="twoinputs row">
+                    <div class="col-12 my-1">
+                      <!-- dont play with row lw 3ayz t3mlha w 2na t7t seb 2l row w 5od 2ly gowah copy m3ak l7d col-12 2na m5le kol wa7d col-2 f m3ak kman 5 msln-->
+                      <div class="row d-flex justify-content-start">
+                        <!-- copy this start -->
+                        <div class="col-6 col-md-3 d-flex flex-column gap-1 my-1">
+                          <h5 for="weight" class="form-label text-sec mx-1 ">weight</h5>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="number" name="weight" id="weight" placeholder="weight" class="form-control weight" min="1" step=".01" value="<%= (item?.weight && item?.weight.split(' ')[0]) || '' %>">
+                            <select name="weight" class="form-select weighttype">
+                              <option value="KG" <% if (item?.weight && item?.weight.split(' ')[1] === 'KG') { %> selected <% } %>>KG</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-3 d-flex flex-column gap-1 my-1">
+                          <h5 for="height" class="form-label text-sec mx-1 ">height</h5>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="number" name="height" id="height" placeholder="height" class="form-control height" min="1" step=".01" value="<%= (item?.height && item?.height.split(' ')[0]) || '' %>">
+                            <select name="height" class="form-select heighttype">
+                              <option value="cm" <% if (item?.height && item?.height.split(' ')[1] === 'cm') { %> selected <% } %>>cm</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                          <h5 for="bloodPressure" class="form-label text-sec mx-1 ">Blood Pressure</h5>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="text" name="Blood Pressure" id="bloodPressure" placeholder="Blood Pressure" class="form-control bloodPressure" value="<%= (item && item.bloodPressure && item.bloodPressure.split(' ')[0]) || '' %>">
+                            <select name="Blood Pressure" class="form-select bloodPressuretype">
+                              <option value="mmHg">mmHg</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                          <h5 for="pulseRate" class="form-label text-sec mx-1 ">pulse Rate</h5>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="number" name="pulse Rate" id="pulseRate" placeholder="pulse Rate" class="form-control pulseRate" min="1" step=".01" value="<%= (item?.pulseRate && item?.pulseRate.split(' ')[0]) || '' %>">
+                            <select name="pulse Rate" class="form-select pulseRatetype">
+                              <option value="mmHg">BPM</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <!-- <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                          <label for="temperature" class="form-label text-sec mx-1 ">temperature</label>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="number" name="temperature" id="temperature" placeholder="temperature" class="form-control temperature" min="1" step=".01" value="<%= (item?.temperature && item?.temperature.split(' ')[0]) || '' %>">
+                            <select name="temperature" class="form-select temperaturetype">
+                              <option value="c" <% if (item?.temperature && item?.temperature.split(' ')[1] === 'c') { %> selected <% } %>>°C</option>
+                              <option value="f" <% if (item?.temperature && item?.temperature.split(' ')[1] === 'f') { %> selected <% } %>>°F</option>
+                            </select>
+                          </div>
+                        </div> -->
+
+                        <!-- <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                          <label for="respirationRate" class="form-label text-sec mx-1 ">Respiration Rate</label>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="text" name="respirationRate" id="respirationRate" placeholder="Respiration Rate" class="form-control respirationRate" min="1" step=".01" value="<%= ( item?.respirationRate) || '' %>">
+                          </div>
+                        </div> -->
+
+                        <!-- <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                          <label for="oxygenSaturation" class="form-label text-sec mx-1 ">oxygen Saturation</label>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="text" name="oxygenSaturation" id="oxygenSaturation" placeholder="oxygen Saturation" class="form-control oxygenSaturation" min="1" step=".01" value="<%= ( item?.oxygenSaturation) || '' %>">
+                          </div>
+                        </div> -->
+
+                        <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                          <h5 for="bloodSugar" class="form-label text-sec mx-1 ">Blood Sugar</h5>
+                          <div class="d-flex gap-1 p-0">
+                            <input type="number" name="bloodSugar" id="bloodSugar" placeholder="Blood Sugar" class="form-control bloodSugar" min="1" step=".01" value="<%= (item?.bloodSugar && item?.bloodSugar.split(' ')[0]) || '' %>">
+                            <select name="bloodSugar" class="form-select bloodSugartype">
+                              <option value="mg/dL" <% if (item?.bloodSugar && item?.bloodSugar.split(' ')[1] === 'mg/dL') { %> selected <% } %>>mg/dL</option>
+                              <option value="mmol/L" <% if (item?.bloodSugar && item?.bloodSugar.split(' ')[1] === 'mmol/L') { %> selected <% } %>>mmol/L</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 d-flex flex-column gap-1 my-1">
+                          <h5 for="datePicker" class="form-label text-sec mx-1 ">Date</h5>
+                          <input type="text" id="datePicker" class="form-control text-center dateofthevital" placeholder="Date" value="<%=item?.date%>" />
+                        </div>
+                        <!-- copy this end  -->
+                      </div>
+                      <!-- row end  -->
+                    </div>
+                  </div>
+                  <%});%>
+
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="my-3 row nophoto-row" id="l-Examination">
+      <h5>Examination</h5>
+      <div class="insidecontent" id="examinationsContainer">
+        <%Array.from(record.examination).forEach((item) => {%>
+        <div class="twoinputs row">
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="examinationsType"><%=item.title%></textarea>
+          </div>
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="examinationsComment"><%=item.comment%></textarea>
+          </div>
+          <div class="col-16 my-1 text-center ">
+            <i class="ph ph-bold ph-x"></i>
+          </div>
+        </div>
+        <%});%>
+      </div>
+    </div>
+    <div class="my-3 row text-center btn-row">
+      <div class="col">
+        <button class="btn btn-outline-primary add-btn" type="button" onclick="addclonemain('examinationsContainer')">
+          Add Examination
+        </button>
+      </div>
+    </div>
+    <div class="my-3 row nophoto-row plan" id="l-Plan">
+      <h5>Plan</h5>
+      <div class="col-16 my-1">
+        <textarea class="form-control collectplan" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Plan" autocomplete="on" name="plansType"><%=record.plan%></textarea>
+      </div>
+    </div>
+    <!-- test -->
+
+    <!-- end test -->
+    <div class="my-3  nophoto-row" id="l-RInvestigations">
+      <div class="d-flex gap-1 justify-content-between align-items-center flex-wrap">
+        <h5>Requested Investigations</h5>
+        <div class="d-flex gap-2">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              investigation Presets
+            </button>
+            <ul class="dropdown-menu dropdown-menu-hover">
+              <%Array.from(presets).forEach(preset => {%>
+              <% if(preset.requestedInvestigations.length > 0){%>
+              <li><a class="dropdown-item investigationpresetitem pointer hover-dark" itemofthat='<%- JSON.stringify(preset.requestedInvestigations) %>'><%= preset.name %></a></li>
+              <%}%>
+             <%})%>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Add
+            </button>
+            <ul class="dropdown-menu p-2 scroll text-center ">
+              <li><input type="text" class="dropdown-item form-control dropdown-input my-2 nameofinvestigation" placeholder="Name"></li>
+              <li><button class="btn btn-sm btn-outline-success my-2 addInsideRcordinves" type="button">Save</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- item container -->
+      <div class="insidecontent" id="investigationsContainer">
+        <!-- item -->
+        <%Array.from(record.requestRadiology).forEach((item) => {%>
+        <div class="twoinputs row">
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"><%=item.title%></textarea>
+          </div>
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"><%=item.comment%></textarea>
+          </div>
+          <div class="col-16 my-1 text-center ">
+            <i class="ph ph-bold ph-x"></i>
+          </div>
+        </div>
+        <%});%>
+        <!-- item end -->
+      </div>
+      <!-- item container -->
+      <div class="my-3 row text-center btn-row">
+        <div class="col">
+          <button type="button" class="btn btn-outline-primary add-btn" onclick="addclonemain('investigationsContainer')">
+            Add Investigations
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- test -->
+    <!-- end test -->
+    <div class="my-3 row nophoto-row" id="l-CMedications">
+      <div class="d-flex gap-1 justify-content-between align-items-center flex-wrap">
+        <h5>Current Medications</h5>
+        <div class="d-flex gap-2">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              medication Presets
+            </button>
+            <ul class="dropdown-menu dropdown-menu-hover scroll">
+              <%Array.from(presets).forEach(preset => {%>
+              <% if(preset.currentMedications.length > 0){%>
+              <li><a class="dropdown-item medicationpresetitem" itemofthat='<%- JSON.stringify(preset.currentMedications) %>'><%= preset.name %></a></li>
+              <%}%>
+              <%})%>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-outline-success dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Add
+            </button>
+            <ul class="dropdown-menu p-2 scroll text-center ">
+              <li><input type="text" class="dropdown-item form-control dropdown-input my-2 nameofmedication" placeholder="Name"></li>
+              <li><button class="btn btn-sm btn-outline-success my-2 addInsideRcord" type="button">Save</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class=" insidecontent" id="medicationsContainer">
+        <%Array.from(record.currentMedications).forEach((item) => {%>
+        <div class="row fourinputs twoinputs">
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="medicationsType"><%=item.title%></textarea>
+          </div>
+          <div class="col-16 my-1">
+            <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="medicationsComment"><%=item.description%></textarea>
+          </div>
+          <div class="col-12 col-md-6 my-1">
+            <input type="text" id="datePicker" class="form-control text-center" placeholder="Started At" value="<%=item.startedAt%>" />
+          </div>
+          <div class="col-12 col-md-6 my-1">
+            <input type="text" id="datePicker" class="form-control text-center" placeholder="Ended At" value="<%=item.endedAt %>" />
+          </div>
+          <div class="col-16 my-1 text-center ">
+            <i class="ph ph-bold ph-x"></i>
+          </div>
+        </div>
+        <%});%>
+      </div>
+    </div>
+    <div class="my-3 row text-center btn-row">
+      <div class="col">
+        <button type="button" class="btn btn-outline-primary add-btn" onclick="addcloneMedications()">
+          Add Medications
+        </button>
+      </div>
+    </div>
+    <div class="my-3 row nophoto-row ">
+      <h5>Note</h5>
+      <div class="col-16 my-1">
+        <textarea class="form-control collectnote" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Note" autocomplete="on" name="NoteType"><%=record?.note%></textarea>
+      </div>
+    </div>
+    <div class="row Submit-btn">
+      <div class="col-16 text-center my-1">
+        <button class="btn btn-success add-btn" type="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+<%- include('../small things/smallNav.ejs') %>
+</div>

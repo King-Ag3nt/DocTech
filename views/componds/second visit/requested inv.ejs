@@ -1,0 +1,63 @@
+<div x-show="currentPage === 9" class="form-page" id="page-10">
+  <div class="my-3  nophoto-row" id="l-RInvestigations">
+    <div class="d-flex gap-1 justify-content-between align-items-center flex-wrap">
+      <h5>Requested Investigations</h5>
+      <div class="d-flex gap-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            investigation Presets
+          </button>
+          <ul class="dropdown-menu dropdown-menu-hover">
+            <%Array.from(presets).forEach(preset => {%>
+            <% if(preset.requestedInvestigations.length > 0){%>
+            <li><a class="dropdown-item investigationpresetitem pointer hover-dark" itemofthat='<%- JSON.stringify(preset.requestedInvestigations) %>'><%= preset.name %></a></li>
+            <%}%>
+                 <%})%>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Add
+          </button>
+          <ul class="dropdown-menu p-2 scroll text-center ">
+            <li><input type="text" class="dropdown-item form-control dropdown-input my-2 nameofinvestigation" placeholder="Name"></li>
+            <li><button class="btn btn-sm btn-outline-success my-2 addInsideRcordinves" type="button">Save</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- item container -->
+    <div class="insidecontent" id="investigationsContainer">
+      <!-- item -->
+      <div class="twoinputs row">
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Type" autocomplete="on" name="investigationsType"></textarea>
+        </div>
+        <div class="col-16 my-1">
+          <textarea class="form-control" id="autoHeightTextarea" oninput="autoResize(this)" placeholder="Comment" autocomplete="on" name="investigationsComment"></textarea>
+        </div>
+        <div class="col-16 my-1 text-center ">
+          <i class="ph ph-bold ph-x"></i>
+        </div>
+      </div>
+      <!-- item end -->
+    </div>
+    <!-- item container -->
+    <div class="my-3 row text-center btn-row">
+      <div class="col">
+        <button type="button" class="btn btn-outline-primary add-btn" onclick="addclonemain('investigationsContainer')">
+          Add Investigations
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-secondary" @click="currentPage = 8; activeListItem = 8">Back</button>
+    </div>
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-primary" @click="currentPage = 10; activeListItem = 10">Next</button>
+    </div>
+  </div>
+</div>

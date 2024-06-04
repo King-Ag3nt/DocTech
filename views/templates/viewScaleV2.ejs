@@ -1,0 +1,106 @@
+
+<!-- navbar end -->
+<!-- main content start -->
+<div class="container mt-3 align-items-center d-flex flex-column view-main">
+<%- include('../componds/patientDetelies.ejs')%>
+  <div class="row sm-nav my-4 w-100 ">
+    <div class="col-6 col-md-3 center">
+      <a href="/newView/<%=patient._id%>" class="p-3 get-btn text-dark "><h4>
+        Record
+      </h4></a>
+    </div>
+    <div class="col-6 col-md-3 center">
+      <a href="/viewRelapseV2/<%=patient._id%>" class="p-3 get-btn text-dark ">
+        <h4>
+          Relapses
+        </h4>
+      </a>
+    </div>
+    <div class="col-6 col-md-3 center">
+      <a href="/viewScaleV2/<%=patient._id%>" class="p-3 get-btn text-dark link-active">
+        <h4>
+          Scale
+        </h4>
+      </a>
+    </div>
+    <div class="col-6 col-md-3 center">
+      <a href="/files/<%=patient.serial%>" class="p-3 get-btn text-dark">
+        <h4>
+          Files
+        </h4>
+      </a>
+    </div>
+  </div>
+  <!--  -->
+  <div class="accordion accordion-flush w-100 shadow data-container" id="accordionFlushExample">
+    <!-- item start -->
+    <%patient.patientScale.forEach((scale , index) => {%>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-heading<%=index%>">
+        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=index%>" aria-expanded="false" aria-controls="flush-collapse<%=index%>">
+          <h5>
+            Scale:<%= scale.createdAt.toISOString().split('T')[0]%>
+          </h5>
+        </button>
+      </h2>
+    </div>
+    <div id="flush-collapse<%=index%>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=index%>" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <div class="container w-100">
+
+          <div class="row tnd ">
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h2 class="text-info font-bold">EDSS:</h2>
+              <p class=""><%= scale.EDSS%></p>
+              <p class=""><%= scale?.status%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">visual:</h3>
+              <p><%= scale.FSS.visual%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">brainstem:</h3>
+              <p><%= scale.FSS.brainstem%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">pyramidal:</h3>
+              <p><%= scale.FSS.pyramidal%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">cerebellar:</h3>
+              <p><%= scale.FSS.cerebellar%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">sensory:</h3>
+              <p><%= scale.FSS.sensory%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">BB:</h3>
+              <p><%= scale.FSS.BB%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">mental:</h3>
+              <p><%= scale.FSS.mental%></p>
+            </div>
+            <div class="col d-flex flex-column align-items-center gap-1">
+              <h3 class="text-sec">ambulation:</h3>
+              <p><%= scale.FSS.ambulation%></p>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div class="row btn-cont my-2 w-100">
+          <div class="col text-center">
+            <i class="ph ph-bold ph-trash"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%})%>
+
+    <!-- item end -->
+  </div>
+</div>
+<a href="/AddScaleV2/<%=patient._id%>" class="btn btn-outline-info mt-auto px-3 py-2 ">Add Scale</a>
+
+
